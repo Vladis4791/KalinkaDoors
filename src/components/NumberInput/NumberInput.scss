@@ -1,0 +1,13 @@
+@use '../../styles/colors' as c;
+
+.NumberInput {
+    border: 2px solid c.$border-color;
+    outline: none;
+    border-radius: 5px;
+    transition: all .3s;
+    width: 100%;
+
+    &:focus {
+        border: 2px solid c.$secondary-theme-color;
+    }
+}

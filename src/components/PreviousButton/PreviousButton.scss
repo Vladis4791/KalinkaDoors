@@ -1,0 +1,10 @@
+@use '../../styles/colors' as c;
+
+.previousButton {
+    background-color: c.$secondary-theme-color;
+    text-transform: uppercase;
+
+    &:hover {
+        background-color: darken(c.$secondary-theme-color, 3%);
+    }
+}

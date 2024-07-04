@@ -1,0 +1,10 @@
+@use '../../styles/colors' as c;
+
+.nextButton {
+    background-color: c.$main-theme-color;
+    text-transform: uppercase;
+
+    &:hover {
+        background-color: darken(c.$main-theme-color, 3%);
+    }
+}
