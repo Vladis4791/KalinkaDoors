@@ -1,8 +1,8 @@
 @use '../../styles/colors' as c;
 
-.previousButton {
+.secondaryButton {
     background-color: c.$secondary-theme-color;
-    text-transform: uppercase;
+    display: block;
 
     &:hover {
         background-color: darken(c.$secondary-theme-color, 3%);

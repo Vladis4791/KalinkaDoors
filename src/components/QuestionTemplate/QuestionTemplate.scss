@@ -1,9 +1,64 @@
+@use '../../styles/colors' as c;
+
 .QuestionTemplate {
 
-    
+    width: 80%;
+    margin: 0 auto;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 25%);
+    border-radius: 10px;
+    padding: 15px;
+    height: 95vh;
+    margin-top: 30px; 
 
     .container {
         width: 80%;
         margin: 0 auto;
+        height: 100%;
+    }
+
+    .settingsSection {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 2px solid c.$ui-elements-border;
+        padding: 10px 0;
+        font-weight: bold;
+    }
+
+    .questionTemplateWrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+
+        
+    }
+
+    .questionHeader {
+        .questionName, .questionDescription {
+            text-align: center;
+        }
+
+        .questionName {
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-bottom: 1.75rem;
+        }
+        
+    }
+
+    .questionButtons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 30px;
+
+        .controlButton {
+            width: 30%;
+        }
+        
+        & :first-of-type {
+            margin-right: 20px;
+        }
     }
 }

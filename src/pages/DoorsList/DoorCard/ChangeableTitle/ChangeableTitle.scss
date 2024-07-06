@@ -1,0 +1,33 @@
+@use '../../../../styles/colors' as c;
+
+.ChangeableTitle {
+
+    width: 100%;
+
+    .cardHeader {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+
+        .title {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+    }
+
+    .inputBlock {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+
+        .changeableInput {
+            margin-right: 15px;
+            flex-grow: 1;
+        }
+    }
+
+    .hidden {
+        display: none;
+    }
+}

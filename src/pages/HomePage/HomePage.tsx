@@ -2,7 +2,8 @@ import React from "react";
 import "./HomePage.scss";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
-import NextButton from "../../components/NextButton/NextButton";
+import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
+import calculate from "../../assets/calculate.svg";
 
 const HomePage = () => {
 	const navigate = useNavigate();
@@ -11,14 +12,26 @@ const HomePage = () => {
 		<div className="HomePage">
 			<div className="container">
 				<div className="HomePageContent">
-					<img src="" alt="" className="calculationImage" />
-					<h2 className="homePageHeader">Калькулятор дверей</h2>
-					<p>
-						Калькулятор дверей позволяет получить всю
-						информацию о количестве необходимых составляющих
-						для установки дверей.
-					</p>
-                    <NextButton onClick={() => navigate("doorsCounter")} title="Начать" />
+					<div>
+						<img
+							src={calculate}
+							alt=""
+							className="calculationImage"
+						/>
+						<h2 className="homePageHeader">
+							Калькулятор дверей
+						</h2>
+						<p className="homePageDescription">
+							Калькулятор дверей позволяет получить всю
+							информацию о количестве необходимых
+							составляющих для установки дверей.
+						</p>
+						<PrimaryButton
+                            className="homePageButton"
+							onClick={() => navigate("doorsCounter")}
+							title="Начать"
+						/>
+					</div>
 				</div>
 			</div>
 		</div>

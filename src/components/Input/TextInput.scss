@@ -1,0 +1,10 @@
+@use '../../styles/colors' as c;
+
+.TextInput {
+    display: block;
+    border: 1px solid c.$border-color;
+    outline: none;
+    padding: 12px;
+    border-radius: 10px;
+    box-sizing: border-box;
+}

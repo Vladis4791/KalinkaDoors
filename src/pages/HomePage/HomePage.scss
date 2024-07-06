@@ -1,5 +1,46 @@
 @use './../../styles/colors' as c;
 
 .HomePage {
+
+    height: 100vh;
     
+    .container {
+        width: 80%;
+        margin: 0 auto;
+        height: 100%;
+    }
+
+    .HomePageContent {
+        margin: 0 auto;
+        width: 60%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    img {
+        margin: 0 auto;
+        display: block;
+        margin-bottom: 15px;
+    }
+
+    .homePageHeader {
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .homePageDescription {
+        text-align: center;
+        line-height: 25px;
+        font-family: 'Jost', sans-serif;
+    }
+
+    .homePageButton {
+        width: 200px;
+        margin: 0 auto;
+        margin-top: 20px;
+    }
 }
