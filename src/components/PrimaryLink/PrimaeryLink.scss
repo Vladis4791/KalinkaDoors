@@ -1,0 +1,10 @@
+@use '../../styles/colors' as c;
+
+.primaryLink {
+    background-color: c.$main-theme-color;
+    display: block;
+
+    &:hover {
+        background-color: darken(c.$main-theme-color, 3%);
+    }
+}

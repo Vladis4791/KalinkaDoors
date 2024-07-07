@@ -3,9 +3,8 @@ import QuestionTemplate from "../../components/QuestionTemplate/QuestionTemplate
 import NumberInput from "../../components/NumberInput/NumberInput";
 import { Door, DoorWithComponents } from "../../interfaces/Door.interface";
 import { DoorComponents } from "../../interfaces/DoorComponents.interface";
-import { InputNumber } from 'primereact/inputnumber';
+import { InputNumber } from "primereact/inputnumber";
 import { useNavigate } from "react-router-dom";
-
 
 const createDoorsWithComponentsInstances = (doorsCount: number) => {
 	const doors = [];
@@ -15,7 +14,7 @@ const createDoorsWithComponentsInstances = (doorsCount: number) => {
 		doors.push(currentDoor);
 	}
 
-    return doors;
+	return doors;
 };
 
 const createDoorWithComponentsInstance = (doorId: number) => {
@@ -29,21 +28,27 @@ const createDoorWithComponentsInstance = (doorId: number) => {
 
 const DoorsCounter = () => {
 	const [doorsCount, setDoorsCount] = useState(0);
-    const navigate = useNavigate();
+	const navigate = useNavigate();
 
 	const onSubmit = () => {
-
-        const doors = createDoorsWithComponentsInstances(doorsCount);
+		const doors = createDoorsWithComponentsInstances(doorsCount);
 		localStorage.setItem("doors", JSON.stringify(doors));
-        navigate("/doorsList");
+		navigate("/doorsList");
 	};
 
 	return (
 		<QuestionTemplate
 			questionName="Введите количество дверей"
 			onSubmit={onSubmit}
+            nextPageRoute="/doorsList"
+            previousPageRoute="/"
 		>
-			<InputNumber value={doorsCount} onValueChange={(e) => setDoorsCount(e.value)} />
+			<NumberInput
+				value={doorsCount}
+				onChange={(value: number) => setDoorsCount(value)}
+				min={1}
+				max={20}
+			/>
 		</QuestionTemplate>
 	);
 };

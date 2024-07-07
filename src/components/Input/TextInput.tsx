@@ -1,17 +1,21 @@
 import React from "react";
-import './TextInput.scss';
+import "./TextInput.scss";
 
 interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-    inputRef?: React.MutableRefObject<HTMLInputElement>;
+	inputRef?: React.MutableRefObject<HTMLInputElement>;
+	inputLabel?: string;
 }
 
-const TextInput = ({inputRef, ...props }: TextInputProps) => {
+const TextInput = ({ inputRef, inputLabel, ...props }: TextInputProps) => {
 	return (
-		<input
-            {...props}
-            className={`TextInput ${props.className}`}
-			ref={inputRef}
-		/>
+		<div className="TextInputBlock">
+			<div className="inputLabel">{inputLabel}</div>
+			<input
+				{...props}
+				className={`TextInput ${props.className}`}
+				ref={inputRef}
+			/>
+		</div>
 	);
 };
 

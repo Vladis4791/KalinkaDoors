@@ -6,6 +6,12 @@ import DoorsCounter from "./questions/DoorsCounter/DoorsCounter";
 import DoorsList from "./pages/DoorsList/DoorsList";
 import DoorType from "./pages/SpecificDoorQuestions/DoorType/DoorType";
 import CurrentDoorSettings from "./pages/CurrentDoorSettings/CurrentDoorSettings";
+import DoorStateQuestion from "./pages/SpecificDoorQuestions/DoorState/DoorState";
+import DoorSize from "./pages/SpecificDoorQuestions/DoorSize/DoorSize";
+import Depth from "./pages/SpecificDoorQuestions/DoorSize/Depth";
+import Width from "./pages/SpecificDoorQuestions/DoorSize/Width";
+import Height from "./pages/SpecificDoorQuestions/DoorSize/Height";
+import DoorstepSettings from "./pages/DoorstepSettings/DoorstepSettings";
 
 function App() {
 	return (
@@ -15,12 +21,17 @@ function App() {
 
 				<Route path="doorsCounter" element={<DoorsCounter />} />
 				<Route path="doorsList" element={<DoorsList />} />
-				<Route path="settings/:doorId" element={<CurrentDoorSettings />}>
+				<Route
+					path="settings/:doorId"
+					element={<CurrentDoorSettings />}
+				>
 					<Route path="type" element={<DoorType />} />
-					<Route path="state" element={<HomePage />} />
-					<Route path="size" element={<HomePage />} />
+					<Route path="state" element={<DoorStateQuestion />} />
+					<Route path="depth" element={<Depth />} />
+					<Route path="width" element={<Width />} />
+					<Route path="height" element={<Height />} />
 				</Route>
-				<Route path="doorsStep" element={<HomePage />} />
+				<Route path="doorsStep" element={<DoorstepSettings />} />
 				<Route
 					path="fixationTypeSelection"
 					element={<HomePage />}

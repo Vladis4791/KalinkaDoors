@@ -1,0 +1,10 @@
+@use '../../styles/colors' as c;
+
+.secondaryButton {
+    background-color: c.$secondary-theme-color;
+    display: block;
+
+    &:hover {
+        background-color: darken(c.$secondary-theme-color, 3%);
+    }
+}

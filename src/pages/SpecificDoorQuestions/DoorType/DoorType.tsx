@@ -13,13 +13,19 @@ const DoorType = () => {
 	const [doorVariation, setDoorVariation] = useState<DoorVariation>(null);
 
     const door = useOutletContext<Door>();
-    console.log(door)
+
+    useEffect(() => {
+        console.log("rerender");
+    })
 
 	return (
 		<QuestionTemplate
 			questionName="Выберите тип двери"
 			onSubmit={() => {}}
-            // settingsSectionName={`Настройка двери "${door.name}"`}
+            settingsSectionName={`Настройка двери ${door ? `"Дверь ${door.id}` : ""}"`}
+            nextPageRoute={`/settings/${door?.id}/state`}
+            previousPageRoute="/doorsList"
+            isLoading={!door}
 		>
 			<RadioButton
 				groupName="doorType"

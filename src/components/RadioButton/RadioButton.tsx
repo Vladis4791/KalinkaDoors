@@ -1,14 +1,14 @@
 import React from "react";
-import './RadioButton.scss';
+import "./RadioButton.scss";
 
 const RadioButton = (props: {
 	radioButtonName: string;
 	checked: boolean;
 	onChange: () => void;
 	groupName: string;
+	iconURL?: string;
 }) => {
-
-	const { radioButtonName, onChange, groupName, checked } = props;
+	const { radioButtonName, onChange, groupName, checked, iconURL } = props;
 
 	return (
 		<label className="RadioButtonBlock">
@@ -20,7 +20,10 @@ const RadioButton = (props: {
 				checked={checked}
 				value={radioButtonName}
 			/>
-			<div className="label">{radioButtonName}</div>
+			<div className="label">
+				{ iconURL ? <img src={iconURL} className="radioButtonImg" alt="" /> : null }
+				<div className="radioButtonName">{radioButtonName}</div>
+			</div>
 		</label>
 	);
 };

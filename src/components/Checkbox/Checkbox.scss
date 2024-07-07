@@ -1,14 +1,11 @@
-@use '../../styles/colors' as c;
-
-.RadioButtonBlock {
-
-    .RadioButton {
+.checkboxBlock {
+    .checkbox {
         position: absolute;
         z-index: -1;
         opacity: 0;
     }
 
-    .label {
+    .checkboxContent {
         width: 40vw;
         margin: 0 auto;
         padding: 20px;
@@ -34,5 +31,4 @@
         // border: 2px solid c.$main-theme-color;
         border: 3px solid c.$secondary-theme-color;
     }
-
 }

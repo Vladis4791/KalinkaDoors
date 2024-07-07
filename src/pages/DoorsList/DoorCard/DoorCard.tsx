@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import ChangeableTitle from "./ChangeableTitle/ChangeableTitle";
 import SecondaryButton from "../../../components/SecondaryButton/SecondaryButton";
-import PrimaryButton from "../../../components/PrimaryButton/PrimaryButton";
 import { Door } from "../../../interfaces/Door.interface";
-import { useNavigate } from "react-router-dom";
 import "./DoorCard.scss";
+import PrimaryLink from "../../../components/PrimaryLink/PrimaryLink";
+import SecondaryLink from "../../../components/SecondaryLink/SecondaryLink";
 
 const DoorCard = ({
 	door,
@@ -13,11 +13,6 @@ const DoorCard = ({
 	door: Door;
 	onTitleChange: (newTitle: string) => void;
 }) => {
-	const navigate = useNavigate();
-
-	// const goToComponentsSettings = () => navigate(`settings/${door.id}`);
-
-	const goToDoorSettings = () => navigate(`/settings/${door.id}/type`);
 
 	return (
 		<div className="DoorCard">
@@ -25,13 +20,13 @@ const DoorCard = ({
 				onSubmit={onTitleChange}
 				title={door.name}
 			/>
-			<SecondaryButton
-				onClick={() => {}}
+			<SecondaryLink
+				to={""}
 				className="doorCardButton"
 				title="Посмотреть комплектующие"
 			/>
-			<PrimaryButton
-				onClick={goToDoorSettings}
+			<PrimaryLink
+                to={`/settings/${door.id}/type`}
 				className="doorCardButton"
 				title="Настроить дверь"
 			/>
