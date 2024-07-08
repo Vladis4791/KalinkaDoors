@@ -7,6 +7,7 @@ import IconButton from "../IconButton/IconButton";
 import close from "../../assets/close.svg";
 import Loading from "../Loading/Loading";
 import PrimaryLink from "../PrimaryLink/PrimaryLink";
+import SecondaryLink from "../SecondaryLink/SecondaryLink";
 
 interface QuestionTemplateInterface {
 	questionName: string;
@@ -31,14 +32,6 @@ const QuestionTemplate = (props: QuestionTemplateInterface) => {
 		isLoading = false,
 	} = props;
 
-	const navigate = useNavigate();
-
-    console.log(isLoading)
-
-	const onNextButtonClicked = () => {
-		onSubmit();
-		navigate(nextPageRoute);
-	};
 
 	return (
 		<div className="QuestionTemplate">
@@ -61,24 +54,27 @@ const QuestionTemplate = (props: QuestionTemplateInterface) => {
 								<h2 className="questionName">
 									{questionName}
 								</h2>
-								<p className="questionDescription">
-									{questionDescription}
-								</p>
+								{questionDescription ? (
+									<p className="questionDescription">
+										{questionDescription}
+									</p>
+								) : null}
 							</div>
 							<div className="question">{children}</div>
 							<div className="questionButtons">
-								<SecondaryButton
+								<SecondaryLink
 									className="controlButton"
-									onClick={() =>
-										navigate(previousPageRoute)
-									}
-									title="Назад"
-								/>
+									to={previousPageRoute}
+								>
+									Назад
+								</SecondaryLink>
 								<PrimaryLink
 									className="controlButton"
-									to={}
-									title="Далее"
-								/>
+									to={nextPageRoute}
+									onClick={onSubmit}
+								>
+									Далее
+								</PrimaryLink>
 							</div>
 						</div>
 					</div>

@@ -1,13 +1,23 @@
-enum FixationType {
+export enum FixationType {
     MAGNIT,
     TONGUE,
 }
 
-enum LockingType {
+export enum DoorState {
+	DOOR_IS_SET,
+	PLAIN_DOORWAY,
+}
+
+export enum DoorVariation {
+	FRONT_DOOR,
+	INTERIOR_DOOR,
+}
+
+export enum LockingType {
 
 }
 
-enum HandleType {
+export enum HandleType {
 
 }
 

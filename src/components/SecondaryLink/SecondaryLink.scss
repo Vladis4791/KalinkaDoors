@@ -1,8 +1,13 @@
 @use '../../styles/colors' as c;
+@use '../../styles/mixins' as m;
 
-.secondaryButton {
+.secondaryLink {
     background-color: c.$secondary-theme-color;
-    display: block;
+    @include m.linkStyle;
+
+    &:active, &:visited {
+        color: #fff;
+    }
 
     &:hover {
         background-color: darken(c.$secondary-theme-color, 3%);

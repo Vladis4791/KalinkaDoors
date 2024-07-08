@@ -8,7 +8,7 @@ const Checkbox = ({
 	onChange,
 }: {
 	checked: boolean;
-	onChange: (boolean) => void;
+	onChange: () => void;
 	checkboxContent: string;
 }) => {
 	return (

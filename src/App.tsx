@@ -12,6 +12,9 @@ import Depth from "./pages/SpecificDoorQuestions/DoorSize/Depth";
 import Width from "./pages/SpecificDoorQuestions/DoorSize/Width";
 import Height from "./pages/SpecificDoorQuestions/DoorSize/Height";
 import DoorstepSettings from "./pages/DoorstepSettings/DoorstepSettings";
+import MainFixationTypePage from "./pages/FixationType/MainFixationTypePage";
+import OneFixationTypeOnObjectSetting from "./pages/FixationType/OneFixationTypeOnObjectSetting/OneFixationTypeOnObjectSetting";
+import DifferentFixationTypesOnObject from "./pages/FixationType/DifferentFixationTypesOnObject/DifferentFixationTypesOnObject";
 
 function App() {
 	return (
@@ -31,15 +34,18 @@ function App() {
 					<Route path="width" element={<Width />} />
 					<Route path="height" element={<Height />} />
 				</Route>
-				<Route path="doorsStep" element={<DoorstepSettings />} />
+				<Route path="doorsteps" element={<DoorstepSettings />} />
 				<Route
 					path="fixationTypeSelection"
-					element={<HomePage />}
+					element={<MainFixationTypePage />}
 				/>
-				<Route path="oneFixationType" element={<HomePage />} />
 				<Route
-					path="differentFixationType"
-					element={<HomePage />}
+					path="oneFixationType"
+					element={<OneFixationTypeOnObjectSetting />}
+				/>
+				<Route
+					path="differentFixationTypes"
+					element={<DifferentFixationTypesOnObject />}
 				/>
 			</Routes>
 		</div>

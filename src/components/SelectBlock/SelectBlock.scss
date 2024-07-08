@@ -1,0 +1,14 @@
+.SelectBlock {
+    display: flex;
+    align-items: center;
+
+    .selectLabel {
+        margin-right: 15px;
+        font-weight: 400;
+    }
+
+    .helpIcon {
+        margin-left: 15px;
+    }
+    
+}

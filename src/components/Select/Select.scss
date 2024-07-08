@@ -1,0 +1,27 @@
+@use "../../styles/colors" as c;
+
+.Select {
+	padding: 10px 15px;
+	cursor: pointer;
+	border: 1px solid c.$border-color;
+	border-radius: 0;
+	width: 100%;
+	overflow: hidden;
+
+	&:not(.p-disabled).p-focus {
+		box-shadow: none !important;
+	}
+
+	.p-dropdown-trigger {
+		justify-content: right;
+	}
+}
+
+.p-dropdown-item {
+	text-wrap: wrap;
+	padding: 10px;
+
+	&.p-highlight {
+		background: #e5e7eb;
+	}
+}

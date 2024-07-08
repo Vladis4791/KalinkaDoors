@@ -3,12 +3,10 @@ import { Door } from "../../interfaces/Door.interface";
 import { doorsAPI } from "../../APIs/doors.api";
 import DoorCard from "./DoorCard/DoorCard";
 import "./DoorsList.scss";
-import SecondaryButton from "../../components/SecondaryButton/SecondaryButton";
-import { useNavigate } from "react-router-dom";
+import SecondaryLink from "../../components/SecondaryLink/SecondaryLink";
 
 const DoorsList = () => {
 	const [doors, setDoors] = useState<Door[]>([]);
-    const navigate = useNavigate();
 
 	useEffect(() => {
 		setDoors(doorsAPI.getAllDoors());
@@ -16,15 +14,14 @@ const DoorsList = () => {
 	}, []);
 
 	const onDoorTitleChange = (doorId: string, newTitle: string) => {
-		const newDoors = doors.map((door) => {
-			return { ...door };
-		});
+		const newDoors = structuredClone(doors);
 
 		const doorWithChangedTitle = newDoors.find(
 			(door) => door.id === doorId
 		);
 		doorWithChangedTitle.name = newTitle;
 		setDoors(newDoors);
+		localStorage.setItem("doors", JSON.stringify(newDoors));
 	};
 
 	return (
@@ -45,10 +42,9 @@ const DoorsList = () => {
 					))}
 				</div>
 
-				<SecondaryButton
-					onClick={() => {}}
-					title="Подобрать доп. комплектующие"
-				/>
+				<SecondaryLink to="/doorsteps">
+					Подобрать доп. комплектующие
+				</SecondaryLink>
 			</div>
 		</div>
 	);

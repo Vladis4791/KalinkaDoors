@@ -1,0 +1,10 @@
+@mixin linkStyle {
+    display: block;
+    padding: 15px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    transition: all .2s;
+}

@@ -2,17 +2,21 @@
 
 .TextInputBlock {
 
-    .inputLabel + .TextInput:focus {
-        color: red;
-    }
-
     .TextInput {
         display: block;
         border: 1px solid c.$border-color;
         outline: none;
-        padding: 12px;
+        padding: 15px;
+        font-size: 1rem;
         border-radius: 10px;
         box-sizing: border-box;
+        transition: all .2s;
+        outline: 1px solid #fff;
+
+        &:focus {
+            border: 1px solid c.$secondary-theme-color;
+            outline: 1px solid c.$secondary-theme-color;
+        }
     }
 
 }

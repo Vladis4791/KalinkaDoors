@@ -1,31 +1,35 @@
 import React, { useEffect, useState } from "react";
 import QuestionTemplate from "../../../components/QuestionTemplate/QuestionTemplate";
 import RadioButton from "../../../components/RadioButton/RadioButton";
-import { useOutletContext, useParams } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 import { Door } from "../../../interfaces/Door.interface";
-
-enum DoorVariation {
-	FRONT_DOOR,
-	INTERIOR_DOOR,
-}
+import { DoorVariation } from "../../../interfaces/DoorComponents.interface";
+import { doorsAPI } from "../../../APIs/doors.api";
 
 const DoorType = () => {
 	const [doorVariation, setDoorVariation] = useState<DoorVariation>(null);
 
-    const door = useOutletContext<Door>();
+	const door = useOutletContext<Door>();
 
-    useEffect(() => {
-        console.log("rerender");
-    })
+	useEffect(() => {
+		console.log("rerender");
+	});
+
+    const onSubmit = () => {
+
+        door.doorInfo.type = doorVariation;
+        doorsAPI.updateDoor(door);
+        console.log("onsubmit")
+    }
 
 	return (
 		<QuestionTemplate
 			questionName="Выберите тип двери"
-			onSubmit={() => {}}
-            settingsSectionName={`Настройка двери ${door ? `"Дверь ${door.id}` : ""}"`}
-            nextPageRoute={`/settings/${door?.id}/state`}
-            previousPageRoute="/doorsList"
-            isLoading={!door}
+			onSubmit={onSubmit}
+			settingsSectionName={`Настройка двери ${door ? `"Дверь ${door.id}` : ""}"`}
+			nextPageRoute={`/settings/${door?.id}/state`}
+			previousPageRoute="/doorsList"
+			isLoading={!door}
 		>
 			<RadioButton
 				groupName="doorType"
@@ -37,7 +41,9 @@ const DoorType = () => {
 				groupName="doorType"
 				checked={doorVariation === DoorVariation.INTERIOR_DOOR}
 				radioButtonName="Межкомнатная"
-				onChange={() => setDoorVariation(DoorVariation.INTERIOR_DOOR)}
+				onChange={() =>
+					setDoorVariation(DoorVariation.INTERIOR_DOOR)
+				}
 			/>
 		</QuestionTemplate>
 	);

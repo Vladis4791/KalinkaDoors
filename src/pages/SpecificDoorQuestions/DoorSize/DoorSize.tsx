@@ -2,10 +2,15 @@ import React, { useEffect, useState } from "react";
 import QuestionTemplate from "../../../components/QuestionTemplate/QuestionTemplate";
 import NumberInput from "../../../components/NumberInput/NumberInput";
 
+const enum DoorDimension {
+    WIDTH,
+    HEIGHT,
+    DEPTH
+}
+
 const DoorSize = (props: {
 	questionName: string;
-	russianDimensionName: string;
-	englishDimensionName: string;
+    inputLabel: string;
 	imageURL?: string;
 	nextPageRoute?: string;
 	previousPageRoute?: string;
@@ -14,8 +19,7 @@ const DoorSize = (props: {
 }) => {
 	const {
 		questionName,
-		russianDimensionName: russianDimenstionName,
-		englishDimensionName: englishDimenstionName,
+        inputLabel,
 		nextPageRoute,
 		previousPageRoute,
 		onChange,
@@ -28,16 +32,14 @@ const DoorSize = (props: {
 			nextPageRoute={nextPageRoute}
 			previousPageRoute={previousPageRoute}
 			onSubmit={() => {}}
-			key={englishDimenstionName}
 		>
 			<NumberInput
-				value={length}
+				value={value}
 				onChange={onChange}
-
 				min={1}
 				max={500}
 				fractionDigits={1}
-				inputLabel={`${russianDimenstionName} проема`}
+				inputLabel={inputLabel}
 			/>
 		</QuestionTemplate>
 	);

@@ -3,11 +3,9 @@ import QuestionTemplate from "../../../components/QuestionTemplate/QuestionTempl
 import RadioButton from "../../../components/RadioButton/RadioButton";
 import { useOutletContext } from "react-router-dom";
 import { Door } from "../../../interfaces/Door.interface";
+import { DoorState } from "../../../interfaces/DoorComponents.interface";
 
-enum DoorState {
-	DOOR_IS_SET,
-	PLAIN_DOORWAY,
-}
+
 
 const DoorStateQuestion = () => {
 	const [currentDoorState, setCurrentDoorState] = useState<DoorState>(null);
@@ -28,7 +26,7 @@ const DoorStateQuestion = () => {
                 onChange={() => setCurrentDoorState(DoorState.DOOR_IS_SET)}
 			/>
 			<RadioButton
-				radioButtonName="Есть только проем"
+				radioButtonName="Есть только пустой проем"
 				groupName="doorState"
 				checked={currentDoorState === DoorState.PLAIN_DOORWAY}
                 onChange={() => setCurrentDoorState(DoorState.PLAIN_DOORWAY)}

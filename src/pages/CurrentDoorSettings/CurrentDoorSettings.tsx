@@ -8,7 +8,6 @@ const CurrentDoorSettings = () => {
 	const { doorId } = useParams();
 
 	useEffect(() => {
-		console.log("here", doorId);
 		const door = doorsAPI.getDoorById(doorId) as Door;
 		console.log(door);
 		if (!door) {

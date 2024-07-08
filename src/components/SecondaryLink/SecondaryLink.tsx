@@ -1,19 +1,16 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, NavLinkProps } from "react-router-dom";
 import "./SecondaryLink.scss";
 
 const SecondaryLink = ({
 	to,
 	className,
-	title,
-}: {
-	to: string;
-	className: string;
-	title: string;
-}) => {
+	children,
+	onClick,
+}: NavLinkProps) => {
 	return (
-		<NavLink className={`secondaryLink ${className}`} to={to}>
-			{title}
+		<NavLink onClick={onClick} className={`secondaryLink ${className}`} to={to}>
+			{children}
 		</NavLink>
 	);
 };

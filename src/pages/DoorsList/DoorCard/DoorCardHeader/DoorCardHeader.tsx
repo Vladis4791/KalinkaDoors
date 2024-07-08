@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import edit from "../../../../assets/edit.svg";
 import IconButton from "../../../../components/IconButton/IconButton";
-import "./ChangeableTitle.scss";
+import "./DoorCardHeader.scss";
 import done from "../../../../assets/done.svg";
 import close from "../../../../assets/close.svg";
 import TextInput from "../../../../components/Input/TextInput";
 
-const ChangeableTitle = ({
+const DoorCardHeader = ({
 	onSubmit,
 	title,
 }: {
@@ -37,8 +37,8 @@ const ChangeableTitle = ({
 	};
 
 	return (
-		<div className="ChangeableTitle">
-			<div className={`inputBlock ${!isEditing ? "hidden" : ""}`}>
+		<div className="DoorCardHeader">
+			<div className={`editHeader ${!isEditing ? "hidden" : ""}`}>
 				<TextInput
                     className="changeableInput"
                     inputRef={inputRef}
@@ -49,7 +49,7 @@ const ChangeableTitle = ({
 				<IconButton iconURL={close} onClick={onCanceled} />
 			</div>
 
-			<div className={`cardHeader ${isEditing ? "hidden" : ""}`}>
+			<div className={`previewHeader ${isEditing ? "hidden" : ""}`}>
 				<div className="title">{title}</div>
 				<div className="editSign">
 					<IconButton
@@ -62,4 +62,4 @@ const ChangeableTitle = ({
 	);
 };
 
-export default ChangeableTitle;
+export default DoorCardHeader;

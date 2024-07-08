@@ -9,10 +9,9 @@ const Height = () => {
 	return (
 		<DoorSize
 			questionName="Померьте высоту дверного проема"
-			russianDimensionName="Высота"
-			englishDimensionName="height"
-			nextPageRoute="../width"
-			previousPageRoute="/doorsList"
+            inputLabel="Высота проема"
+			nextPageRoute="/doorsList"
+			previousPageRoute="../width"
             value={length}
             onChange={(value) => setLength(value)}
 		/>

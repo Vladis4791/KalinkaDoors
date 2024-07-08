@@ -1,7 +1,21 @@
 .App {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Jost', sans-serif;
 }
 
 body {
     font-size: 16px;
+    overflow-y: hidden;
 }
+
+*::-webkit-scrollbar {
+    height: 12px;
+    width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+    background: inherit;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: #c2bebe;
+    border-radius: 3px;
+  }

@@ -1,6 +1,5 @@
 import React from "react";
-import ChangeableTitle from "./ChangeableTitle/ChangeableTitle";
-import SecondaryButton from "../../../components/SecondaryButton/SecondaryButton";
+import DoorCardHeader from "./DoorCardHeader/DoorCardHeader";
 import { Door } from "../../../interfaces/Door.interface";
 import "./DoorCard.scss";
 import PrimaryLink from "../../../components/PrimaryLink/PrimaryLink";
@@ -13,23 +12,18 @@ const DoorCard = ({
 	door: Door;
 	onTitleChange: (newTitle: string) => void;
 }) => {
-
 	return (
 		<div className="DoorCard">
-			<ChangeableTitle
-				onSubmit={onTitleChange}
-				title={door.name}
-			/>
-			<SecondaryLink
-				to={""}
-				className="doorCardButton"
-				title="Посмотреть комплектующие"
-			/>
+			<DoorCardHeader onSubmit={onTitleChange} title={door.name} />
+			<SecondaryLink to={""} className="doorCardButton">
+				Посмотреть комплектующие
+			</SecondaryLink>
 			<PrimaryLink
-                to={`/settings/${door.id}/type`}
+				to={`/settings/${door.id}/type`}
 				className="doorCardButton"
-				title="Настроить дверь"
-			/>
+			>
+				Настроить дверь
+			</PrimaryLink>
 		</div>
 	);
 };
