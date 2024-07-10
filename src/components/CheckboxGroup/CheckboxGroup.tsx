@@ -5,12 +5,14 @@ import './CheckboxGroup.scss';
 
 const CheckboxGroup = ({
 	doors,
+    initialCheckedDoorsIds = [],
 	onChange,
 }: {
 	doors: Door[];
+    initialCheckedDoorsIds?: string[],
 	onChange: (checkedDoorsIds: string[]) => void;
 }) => {
-	const [checkedDoorsIds, setCheckedDoorsIds] = useState<string[]>([]);
+	const [checkedDoorsIds, setCheckedDoorsIds] = useState<string[]>(initialCheckedDoorsIds);
 
 	const onChecked = (id: string) => {
 		const isInCheckedDoors = checkedDoorsIds.includes(id);
@@ -30,6 +32,7 @@ const CheckboxGroup = ({
 		<div className="CheckboxGroup">
 			{doors.map((door: Door) => (
 				<Checkbox
+                    key={door.id}
 					checked={checkedDoorsIds.includes(door.id)}
 					onChange={() => onChecked(door.id)}
 					checkboxContent={door.name}

@@ -17,11 +17,20 @@
 	}
 }
 
-.p-dropdown-item {
-	text-wrap: wrap;
-	padding: 10px;
+.p-dropdown-items {
+    border: 1px solid c.$border-color;
 
-	&.p-highlight {
-		background: #e5e7eb;
-	}
+}
+
+
+.p-dropdown-item {
+	padding: 15px;
+    background: #fff;
+    transition: all .2s;
+    font-family: "Jost", sans-serif;
+
+    &:hover {
+        background: rgb(238, 237, 237);
+    }
+
 }

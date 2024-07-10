@@ -17,6 +17,7 @@ interface QuestionTemplateInterface {
 	previousPageRoute?: string;
 	onSubmit: () => void;
 	children: React.ReactNode;
+    fixedBlock?: React.ReactNode;
 	isLoading?: boolean;
 }
 
@@ -29,6 +30,7 @@ const QuestionTemplate = (props: QuestionTemplateInterface) => {
 		settingsSectionName = questionName,
 		children,
 		onSubmit,
+        fixedBlock,
 		isLoading = false,
 	} = props;
 
@@ -61,6 +63,7 @@ const QuestionTemplate = (props: QuestionTemplateInterface) => {
 								) : null}
 							</div>
 							<div className="question">{children}</div>
+                            <div className="fixed">{ fixedBlock }</div>
 							<div className="questionButtons">
 								<SecondaryLink
 									className="controlButton"

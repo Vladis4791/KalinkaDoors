@@ -4,22 +4,33 @@ import IconButton from "../IconButton/IconButton";
 import help from "../../assets/help.svg";
 import "./SelectBlock.scss";
 
+interface optionWithImages {
+    optionName: string;
+    imageURL: string;
+}
+
 const SelectBlock = (props: {
 	selectLabel: string;
-	options: string[];
+	optionsWithImages: optionWithImages[];
 	value: string;
 	onChange: (option: string) => void;
 }) => {
-	const { selectLabel, ...selectProps } = props;
+	const { selectLabel, optionsWithImages, value, onChange } = props;
+    const selectOptions = optionsWithImages.map(optionWithImage => optionWithImage.optionName)
+
+    const getImageURLByOptionName = (optionName: string) => {
+        const optionWithImage = optionsWithImages.find(optionWithImage => optionWithImage.optionName === optionName);
+        return optionWithImage.imageURL;
+    }
 
 	return (
 		<div className="SelectBlock">
 			<div className="selectLabel">{selectLabel}</div>
-			<Select {...selectProps} />
+			<Select value={value} onChange={onChange} options={selectOptions} />
 			<div className="helpIcon">
 				<IconButton
 					iconURL={help}
-					onClick={() => console.log("modal with ")}
+					onClick={() => console.log(`modal with ${getImageURLByOptionName(value)}`)}
 				/>
 			</div>
 		</div>

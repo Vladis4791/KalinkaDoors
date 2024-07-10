@@ -1,13 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import HomePage from "./pages/HomePage/HomePage";
-import QuestionTemplate from "./components/QuestionTemplate/QuestionTemplate";
 import DoorsCounter from "./questions/DoorsCounter/DoorsCounter";
 import DoorsList from "./pages/DoorsList/DoorsList";
 import DoorType from "./pages/SpecificDoorQuestions/DoorType/DoorType";
 import CurrentDoorSettings from "./pages/CurrentDoorSettings/CurrentDoorSettings";
 import DoorStateQuestion from "./pages/SpecificDoorQuestions/DoorState/DoorState";
-import DoorSize from "./pages/SpecificDoorQuestions/DoorSize/DoorSize";
 import Depth from "./pages/SpecificDoorQuestions/DoorSize/Depth";
 import Width from "./pages/SpecificDoorQuestions/DoorSize/Width";
 import Height from "./pages/SpecificDoorQuestions/DoorSize/Height";
@@ -15,13 +13,14 @@ import DoorstepSettings from "./pages/DoorstepSettings/DoorstepSettings";
 import MainFixationTypePage from "./pages/FixationType/MainFixationTypePage";
 import OneFixationTypeOnObjectSetting from "./pages/FixationType/OneFixationTypeOnObjectSetting/OneFixationTypeOnObjectSetting";
 import DifferentFixationTypesOnObject from "./pages/FixationType/DifferentFixationTypesOnObject/DifferentFixationTypesOnObject";
+import TongueFixationType from "./pages/FixationType/FixationTypePages/TongueFixationType";
+import MagnitFixationType from "./pages/FixationType/FixationTypePages/MagnitFixationType";
 
 function App() {
 	return (
 		<div className="App">
 			<Routes>
 				<Route path="/" element={<HomePage />} />
-
 				<Route path="doorsCounter" element={<DoorsCounter />} />
 				<Route path="doorsList" element={<DoorsList />} />
 				<Route
@@ -46,7 +45,15 @@ function App() {
 				<Route
 					path="differentFixationTypes"
 					element={<DifferentFixationTypesOnObject />}
+				/>{" "}
+				{/* <Route
+					path="tongueFixationTypeDoors"
+					element={<TongueFixationType />}
 				/>
+				<Route
+					path="magnitFixationTypeDoors"
+					element={<MagnitFixationType />}
+				/> */}
 			</Routes>
 		</div>
 	);

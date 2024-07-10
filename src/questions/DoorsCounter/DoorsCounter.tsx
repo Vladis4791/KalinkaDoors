@@ -15,7 +15,7 @@ const DoorsCounter = () => {
 
 	const onSubmit = () => {
 		doorsAPI.setupDoors(doorsCount);
-        doorsAPI.setupObjectState();
+        doorsAPI.SetupFixationTypeState();
 	};
 
 	return (
