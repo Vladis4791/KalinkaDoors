@@ -1,36 +1,41 @@
-import { Door, DoorWithComponents } from "../interfaces/Door.interface";
+import { Door, DoorInfo, DoorWithComponents } from "../interfaces/Door.interface";
 import { DoorComponents } from "../interfaces/DoorComponents.interface";
+import { Storage } from "./storage.api";
 
 
 class DoorsAPI {
-	public getAllDoorsWithItsComponents() {
-		return JSON.parse(localStorage.getItem("doors"));
-	}
+
+    private storage = new Storage<Door[]>("doors");
+    private doors = this.storage.getObject();
 
 	public getAllDoors() {
-		return JSON.parse(localStorage.getItem("doors"));
+		return this.storage.getObject();
 	}
 
 	public getDoorById(doorId: string) {
-		const allDoors = this.getAllDoors();
-		const requiredDoor = allDoors.find(
+		const requiredDoor = this.doors.find(
 			(door: Door) => door.id === doorId
 		);
 		return requiredDoor;
 	}
 
+    // public updateDoorInfo(doorId: string, doorInfo: DoorInfo) {
+    //     const door = this.getDoorById(doorId);
+    //     door.doorInfo = doorInfo;
+    //     localStorage.setItem("doors", JSON.stringify(this.doors));
+    // }
+
 	public updateDoor(doorToUpdate: Door) {
-		const doors = JSON.parse(localStorage.getItem("doors")) as Door[];
-		const index = doors.findIndex((door) => door.id === doorToUpdate.id);
+		const index = this.doors.findIndex((door) => door.id === doorToUpdate.id);
 		if (index !== -1) {
-			doors[index] = doorToUpdate;
-			localStorage.setItem("doors", JSON.stringify(doors));
+			this.doors[index] = doorToUpdate;
+			localStorage.setItem("doors", JSON.stringify(this.doors));
 		}
 	}
 
 	public setupDoors(doorsCount: number) {
 		const doors = this.createDoorsWithComponentsInstances(doorsCount);
-		localStorage.setItem("doors", JSON.stringify(doors));
+        this.storage.writeObject(doors);
 	}
 
 	private createDoorsWithComponentsInstances = (doorsCount: number) => {
@@ -49,6 +54,7 @@ class DoorsAPI {
 		door.name = `Дверь ${doorId}`;
 		door.id = doorId.toString();
 		door.components = {} as DoorComponents;
+        door.doorInfo = {} as DoorInfo;
 
 		return door;
 	};

@@ -1,45 +1,40 @@
 import { FixationTypeState } from "../interfaces/FixationTypeState.interface";
+import { Storage } from "./storage.api";
 
 class FixationTypesStateAPI {
+	private storage = new Storage<FixationTypeState>("fixationTypeState");
 
-    private fixationTypeState: FixationTypeState = JSON.parse(localStorage.getItem('fixationTypeState')) as FixationTypeState;
+	public getFixationTypeState() {
+		return this.storage.getObject();
+	}
 
-    public getFixationTypeState() {
-        return this.fixationTypeState;
-    }
+	public setShouldBeOneFixationTypeOnObject(value: boolean) {
+		this.storage.set("oneFixationTypeOnObject", value);
+	}
 
-    private fixationTypeStateSetter(property: string, value: unknown) {
-        this.fixationTypeState[property] = value;
-        localStorage.setItem('fixationTypeState', JSON.stringify(this.fixationTypeState));
-    }
+	public setTongueDoorsIds(doorsIds: string[]) {
+		this.storage.set("tongueDoorsIds", doorsIds);
+	}
 
-    public setShouldBeOneFixationTypeOnObject(value: boolean) {
-        this.fixationTypeStateSetter("oneFixationTypeOnObject", value);
-    }
+	public setMagnitDoorsIds(doorsIds: string[]) {
+		this.storage.set("magnitDoorsIds", doorsIds);
+	}
 
-    public setTongueDoorsIds(doorsIds: string[]) {
-        this.fixationTypeStateSetter("tongueDoorsIds", doorsIds);
-    }
-
-    public setMagnitDoorsIds(doorsIds: string[]) {
-        this.fixationTypeStateSetter("magnitDoorsIds", doorsIds);
-    }
-
-    public SetupFixationTypeState() {
-		this.fixationTypeState = {
+	public setupFixationTypeState() {
+		const fixationTypeState: FixationTypeState = {
 			oneFixationTypeOnObject: true,
 			tongueDoorsIds: [],
 			magnitDoorsIds: [],
 		};
-  
-        localStorage.setItem('fixationTypeState', JSON.stringify(this.fixationTypeState));
+
+        this.storage.writeObject(fixationTypeState);
+		
 	}
 
-    public resetDoorsIds() {
-        this.setMagnitDoorsIds([]);
-        this.setTongueDoorsIds([]);
-    }
-
+	public resetDoorsIds() {
+		this.setMagnitDoorsIds([]);
+		this.setTongueDoorsIds([]);
+	}
 }
 
 export const fixationTypesStateAPI = new FixationTypesStateAPI();

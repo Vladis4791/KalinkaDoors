@@ -1,21 +1,19 @@
 import React, { useState } from "react";
 import QuestionTemplate from "../../components/QuestionTemplate/QuestionTemplate";
 import NumberInput from "../../components/NumberInput/NumberInput";
-import { Door, DoorWithComponents } from "../../interfaces/Door.interface";
-import { DoorComponents } from "../../interfaces/DoorComponents.interface";
-import { InputNumber } from "primereact/inputnumber";
 import { useNavigate } from "react-router-dom";
 import { doorsAPI } from "../../APIs/doors.api";
-
+import { fixationTypesStateAPI } from "../../APIs/fixationTypesState.api";
+import { lockingTypeStateAPI as lockingTypesStateAPI } from "../../APIs/lockingTypesState.api";
 
 
 const DoorsCounter = () => {
 	const [doorsCount, setDoorsCount] = useState(0);
-	const navigate = useNavigate();
-
+    
 	const onSubmit = () => {
 		doorsAPI.setupDoors(doorsCount);
-        doorsAPI.SetupFixationTypeState();
+        fixationTypesStateAPI.setupFixationTypeState();
+        lockingTypesStateAPI.setupLockingTypeState();
 	};
 
 	return (

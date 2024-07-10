@@ -4,6 +4,7 @@ import RadioButton from "../../../components/RadioButton/RadioButton";
 import { useOutletContext } from "react-router-dom";
 import { Door } from "../../../interfaces/Door.interface";
 import { DoorState } from "../../../interfaces/DoorComponents.interface";
+import { doorsAPI } from "../../../APIs/doors.api";
 
 
 
@@ -12,10 +13,16 @@ const DoorStateQuestion = () => {
 
     const door = useOutletContext<Door>();
     // TODO add images of doorway and doors
+
+    const onSubmit = () => {
+        door.doorInfo.currentState = currentDoorState;
+        doorsAPI.updateDoor(door);
+    }
+
 	return (
 		<QuestionTemplate
 			questionName="Состояние дверного пространства"
-			onSubmit={() => {}}
+			onSubmit={onSubmit}
             nextPageRoute={`/settings/${door?.id}/depth`}
             isLoading={!door}
 		>

@@ -44,6 +44,12 @@
 				padding-top: 5px;
 				margin-bottom: 20px;
 			}
+
+            .question.fixedQuestionBlock {
+                flex-basis: 50vh;
+                position: relative;
+            }
+
 		}
 	}
 

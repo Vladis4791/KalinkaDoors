@@ -13,8 +13,8 @@ import DoorstepSettings from "./pages/DoorstepSettings/DoorstepSettings";
 import MainFixationTypePage from "./pages/FixationType/MainFixationTypePage";
 import OneFixationTypeOnObjectSetting from "./pages/FixationType/OneFixationTypeOnObjectSetting/OneFixationTypeOnObjectSetting";
 import DifferentFixationTypesOnObject from "./pages/FixationType/DifferentFixationTypesOnObject/DifferentFixationTypesOnObject";
-import TongueFixationType from "./pages/FixationType/FixationTypePages/TongueFixationType";
-import MagnitFixationType from "./pages/FixationType/FixationTypePages/MagnitFixationType";
+import DoorsWithLockingSelection from "./pages/LockingType/DoorsWithLockingSelection/DoorsWithLockingSelection";
+import DifferentLockingTypes from "./pages/LockingType/DifferentLockingTypes/DifferentLockingTypes";
 
 function App() {
 	return (
@@ -45,15 +45,16 @@ function App() {
 				<Route
 					path="differentFixationTypes"
 					element={<DifferentFixationTypesOnObject />}
-				/>{" "}
-				{/* <Route
-					path="tongueFixationTypeDoors"
-					element={<TongueFixationType />}
 				/>
 				<Route
-					path="magnitFixationTypeDoors"
-					element={<MagnitFixationType />}
-				/> */}
+					path="doorsWithLockingSelection"
+					element={<DoorsWithLockingSelection />}
+				/>
+				<Route
+					path="differentLockingTypes"
+					element={<DifferentLockingTypes />}
+				/>
+				
 			</Routes>
 		</div>
 	);

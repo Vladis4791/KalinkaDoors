@@ -11,15 +11,9 @@ const DoorType = () => {
 
 	const door = useOutletContext<Door>();
 
-	useEffect(() => {
-		console.log("rerender");
-	});
-
-    const onSubmit = () => {
-
+    const onSubmit = () => {  
         door.doorInfo.type = doorVariation;
         doorsAPI.updateDoor(door);
-        console.log("onsubmit")
     }
 
 	return (

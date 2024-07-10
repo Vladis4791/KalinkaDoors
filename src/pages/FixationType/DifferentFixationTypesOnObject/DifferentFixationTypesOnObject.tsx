@@ -13,11 +13,11 @@ import "./DifferentFixationTypesOnObject.scss";
 import { FixationType } from "../../../interfaces/DoorComponents.interface";
 import { fixationTypesStateAPI } from "../../../APIs/fixationTypesState.api";
 import CheckboxGroupControl from "../../../components/CheckboxGroupControl/CheckboxGroupControl";
+import { useCheckboxGroup } from "../../../hooks/useCheckboxGroup";
 
 const DifferentFixationTypesOnObject = () => {
 	const doors = useDoors();
 
-	const [checkedDoorsIds, setCheckedDoorsIds] = useState<string[]>([]);
 	const [fixationTypeState, setFixationTypeState] =
 		useState<FixationTypeState>(
 			fixationTypesStateAPI.getFixationTypeState()
@@ -32,6 +32,14 @@ const DifferentFixationTypesOnObject = () => {
 				magnitDoorsIds.includes(door.id)
 			)
 	);
+
+	const {
+		checkedDoorsIds,
+		checkAllDoors,
+		uncheckAllDoors,
+		setCheckedDoorsIds,
+		shouldCheckAllDoors,
+	} = useCheckboxGroup(remainingDoors);
 
 	const [fixationType, setFixationType] = useState<FixationType>(
 		FixationType.TONGUE
@@ -55,27 +63,18 @@ const DifferentFixationTypesOnObject = () => {
 	};
 
 	const onShowModal = () => {
-		fixationTypesStateAPI.SetupFixationTypeState();
+		fixationTypesStateAPI.setupFixationTypeState();
 		setFixationTypeState(fixationTypesStateAPI.getFixationTypeState());
 		setCheckedDoorsIds([]);
 	};
-
-	const checkAllDoors = () => {
-		const allCheckedDoorsIds = remainingDoors.map((door) => door.id);
-		setCheckedDoorsIds(allCheckedDoorsIds);
-	};
-
-    const uncheckAllDoors = () => {
-        setCheckedDoorsIds([])
-    }
 
 	const controlBlock = (
 		<div className="fixationTypeControlBlock">
 			<CheckboxGroupControl
 				doorsCount={checkedDoorsIds.length}
 				checkAllDoors={checkAllDoors}
-                uncheckAllDoors={uncheckAllDoors}
-                shouldCheckAllDoors={remainingDoors.length !== checkedDoorsIds.length}
+				uncheckAllDoors={uncheckAllDoors}
+				shouldCheckAllDoors={shouldCheckAllDoors}
 			/>
 			<div className="mainPart">
 				<SelectBlock
@@ -110,7 +109,8 @@ const DifferentFixationTypesOnObject = () => {
 			questionDescription="Выберите двери из списка и установить для них тип фиксации"
 			onSubmit={() => {}}
 			fixedBlock={controlBlock}
-			questionClassName="fixedQuestionBlock"
+			questionFixedInSize={true}
+            nextPageRoute="/doorsWithLockingSelection"
 		>
 			<CheckboxGroup
 				doors={remainingDoors}

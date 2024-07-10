@@ -30,6 +30,6 @@ export interface DoorWithComponents extends Door {
 	// doorInfo:
 }
 
-export interface DoorTotals extends DoorWithComponents, DoorInfo {}
+// export interface DoorTotals extends DoorWithComponents, DoorInfo {}
 
 

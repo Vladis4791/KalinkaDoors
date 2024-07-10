@@ -11,4 +11,8 @@
     .checkboxGroupControlButton {
         width: 200px;
     }
+
+    .checkboxGroupControlButton.disabled {
+        background-color: #a09e9e;
+    }
 }

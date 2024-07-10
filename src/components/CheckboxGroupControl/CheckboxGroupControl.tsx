@@ -1,27 +1,34 @@
 import React from "react";
 import SecondaryButton from "../SecondaryButton/SecondaryButton";
-import './CheckboxGroupControl.scss';
+import "./CheckboxGroupControl.scss";
 
 const CheckboxGroupControl = ({
 	doorsCount,
 	checkAllDoors,
-    uncheckAllDoors,
-    shouldCheckAllDoors
+	uncheckAllDoors,
+	shouldCheckAllDoors,
+	disabled = false,
 }: {
 	doorsCount: number;
 	checkAllDoors: () => void;
-    uncheckAllDoors: () => void;
-    shouldCheckAllDoors: boolean
+	uncheckAllDoors: () => void;
+	shouldCheckAllDoors: boolean;
+	disabled?: boolean;
 }) => {
+	const buttonName = shouldCheckAllDoors ? "Выбрать все" : "Убрать все";
 
-    const buttonName = shouldCheckAllDoors ? "Выбрать все" : "Убрать все";
-
-    const onClick = shouldCheckAllDoors ? checkAllDoors : uncheckAllDoors;
+	const onClick = shouldCheckAllDoors ? checkAllDoors : uncheckAllDoors;
 
 	return (
 		<div className="CheckboxGroupControl">
-			<div className="checkedDoorsCount">Выбрано дверей: { doorsCount }</div>
-            <SecondaryButton title={buttonName} onClick={onClick} className="checkboxGroupControlButton" />
+			<div className="checkedDoorsCount">
+				Выбрано дверей: {doorsCount}
+			</div>
+			<SecondaryButton
+				title={buttonName}
+				onClick={onClick}
+				className={`checkboxGroupControlButton ${disabled ? "disabled" : ""}`}
+			/>
 		</div>
 	);
 };

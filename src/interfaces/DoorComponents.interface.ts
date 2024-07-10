@@ -1,6 +1,6 @@
 export enum FixationType {
-    MAGNIT = "Магнит",
-    TONGUE = "Язычок",
+	MAGNIT = "Магнит",
+	TONGUE = "Язычок",
 }
 
 export enum DoorState {
@@ -14,26 +14,26 @@ export enum DoorVariation {
 }
 
 export enum LockingType {
-
+	TURN_BUTTON = "Заворотка",
+	KEY_FIXATOR = "Ключ фиксатор",
+	TWO_EDGED_KEY = "Ключ с двух сторон",
 }
 
-export enum HandleType {
-
-}
+export enum HandleType {}
 
 interface Dobor {
-    width: number;
-    height: number;
-    count: number;
+	width: number;
+	height: number;
+	count: number;
 }
 
 export interface DoorComponents {
-    doorPanel: number;
-    doorstep: number;
-    fixationType: FixationType
-    lockingType: LockingType
-    handle: HandleType
-    dobor: Dobor[]
-    doorBox: number
-    platband: number // possible change to PlatbandInterface
+	doorPanel: number;
+	doorstep: number;
+	fixationType: FixationType;
+	lockingType: LockingType;
+	handle: HandleType;
+	dobor: Dobor[];
+	doorBox: number;
+	platband: number; // possible change to PlatbandInterface
 }
