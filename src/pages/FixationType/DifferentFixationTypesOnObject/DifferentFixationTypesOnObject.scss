@@ -1,0 +1,19 @@
+.fixationTypeControlBlock .mainPart {
+	display: flex;
+	justify-content: space-between;
+    margin-bottom: 20px;
+
+	.controlButtons {
+		display: flex;
+
+		& :first-of-type {
+			margin-right: 15px;
+		}
+	}
+
+}
+
+.fixedQuestionBlock {
+	flex-basis: 50vh;
+	position: relative;
+}

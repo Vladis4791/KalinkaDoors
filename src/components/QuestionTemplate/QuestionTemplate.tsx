@@ -18,6 +18,7 @@ interface QuestionTemplateInterface {
 	onSubmit: () => void;
 	children: React.ReactNode;
     fixedBlock?: React.ReactNode;
+    questionClassName?: string;
 	isLoading?: boolean;
 }
 
@@ -31,6 +32,7 @@ const QuestionTemplate = (props: QuestionTemplateInterface) => {
 		children,
 		onSubmit,
         fixedBlock,
+        questionClassName = "",
 		isLoading = false,
 	} = props;
 
@@ -62,7 +64,7 @@ const QuestionTemplate = (props: QuestionTemplateInterface) => {
 									</p>
 								) : null}
 							</div>
-							<div className="question">{children}</div>
+							<div className={`question ${questionClassName}`}>{children}</div>
                             <div className="fixed">{ fixedBlock }</div>
 							<div className="questionButtons">
 								<SecondaryLink

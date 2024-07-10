@@ -1,4 +1,10 @@
 .CheckboxGroup {
+    position: absolute;
+    left: 0; 
+    top: 0;
+    width: 100%;
     background-color: #f4f4f4;
     padding: 15px;
+    box-sizing: border-box;
+    min-height: 100%;
 }

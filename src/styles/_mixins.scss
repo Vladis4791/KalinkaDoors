@@ -4,7 +4,18 @@
     box-sizing: border-box;
     border-radius: 10px;
     text-align: center;
-    font-weight: bold;
+    font-weight: 700;
     color: #fff;
     transition: all .2s;
+}
+
+@mixin buttonStyle($backgroundColor: #d3d1d1) {
+    background-color: $backgroundColor;
+    display: block;
+    text-wrap: nowrap;
+    font-weight: 700;
+
+    &:hover {
+        background-color: darken($backgroundColor, 3%);
+    }
 }

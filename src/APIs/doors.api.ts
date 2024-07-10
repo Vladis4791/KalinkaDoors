@@ -1,6 +1,6 @@
 import { Door, DoorWithComponents } from "../interfaces/Door.interface";
 import { DoorComponents } from "../interfaces/DoorComponents.interface";
-import { FixationTypeState } from "../interfaces/FixationTypeState.interface";
+
 
 class DoorsAPI {
 	public getAllDoorsWithItsComponents() {
@@ -32,27 +32,6 @@ class DoorsAPI {
 		const doors = this.createDoorsWithComponentsInstances(doorsCount);
 		localStorage.setItem("doors", JSON.stringify(doors));
 	}
-
-	public SetupFixationTypeState() {
-		const fixationTypeState: FixationTypeState = {
-			oneFixationTypeOnObject: false,
-			tongueDoorsIds: [],
-			magnitDoorsIds: [],
-		};
-
-        console.log("setup")
-
-        localStorage.setItem('fixationTypeState', JSON.stringify(fixationTypeState));
-	}
-
-    public updateFixationTypeState(fixationTypeState: FixationTypeState) {
-        localStorage.setItem('fixationTypeState', JSON.stringify(fixationTypeState));
-    }
-
-    public getFixationTypeState() {
-        console.log("here", JSON.parse(localStorage.getItem('fixationTypeState')))
-        return JSON.parse(localStorage.getItem('fixationTypeState')) as FixationTypeState;
-    }
 
 	private createDoorsWithComponentsInstances = (doorsCount: number) => {
 		const doors = [];

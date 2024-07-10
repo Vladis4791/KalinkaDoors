@@ -1,83 +1,81 @@
-@use '../../styles/colors' as c;
+@use "../../styles/colors" as c;
 
 .QuestionTemplate {
+	width: 80%;
+	margin: 0 auto;
+	box-shadow: 0px 2px 6px rgba(0, 0, 0, 25%);
+	border-radius: 10px;
+	padding: 15px;
+	height: 90vh;
+	margin-top: 30px;
 
-    width: 80%;
-    margin: 0 auto;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 25%);
-    border-radius: 10px;
-    padding: 15px;
-    height: 90vh;
-    margin-top: 30px; 
+	.container {
+		width: 80%;
+		margin: 0 auto;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+	}
 
-    .container {
-        width: 80%;
-        margin: 0 auto;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-    }
+	.settingsSection {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		border-bottom: 2px solid c.$ui-elements-border;
+		padding: 10px 0;
+		font-weight: bold;
+	}
 
-    .settingsSection {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        border-bottom: 2px solid c.$ui-elements-border;
-        padding: 10px 0;
-        font-weight: bold;   
-    }
+	.questionTemplateWrapper {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-grow: 1;
 
-    .questionTemplateWrapper {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-grow: 1;
+		.questionContent {
+			width: 100%;
+			max-height: 75vh;
+			display: flex;
+			flex-direction: column;
 
+			.question {
+				overflow-y: auto;
+				flex-grow: 1;
+				padding-top: 5px;
+				margin-bottom: 20px;
+			}
+		}
+	}
 
-        .questionContent {
-            width: 100%;
-            max-height: 75vh;
-            display: flex;
-            flex-direction: column;
+	.questionHeader {
+		.questionName,
+		.questionDescription {
+			text-align: center;
+		}
 
-            .question {
-                overflow-y: auto;
-                flex-grow: 1;
-                padding-top: 5px;
-            }
-        }
-        
-    }
+		.questionName {
+			font-weight: bold;
+			font-size: 1.5rem;
+			margin: 20px 0;
+		}
 
-    .questionHeader {
-        .questionName, .questionDescription {
-            text-align: center;
-        }
+		.questionDescription {
+			font-size: 1.2rem;
+			margin-bottom: 20px;
+		}
+	}
 
-        .questionName {
-            font-weight: bold;
-            font-size: 1.5rem;
-            margin: 20px 0;
-        }
+	.questionButtons {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 
-        .questionDescription {
-            margin-bottom: 20px;
-        }
-        
-    }
+		.controlButton {
+			width: 30%;
+		}
 
-    .questionButtons {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 30px;
-
-        .controlButton {
-            width: 30%;
-        }
-        
-        & :first-of-type {
-            margin-right: 20px;
-        }
-    }
+		& :first-of-type {
+			margin-right: 20px;
+		}
+	}
 }

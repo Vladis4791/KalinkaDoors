@@ -4,8 +4,8 @@
 
 body {
     font-size: 16px;
-    /* overflow-y: hidden; */ /*TODO figure it out */
 }
+
 
 *::-webkit-scrollbar {
     height: 12px;

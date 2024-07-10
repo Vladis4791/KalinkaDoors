@@ -1,6 +1,6 @@
 export enum FixationType {
-    MAGNIT,
-    TONGUE,
+    MAGNIT = "Магнит",
+    TONGUE = "Язычок",
 }
 
 export enum DoorState {

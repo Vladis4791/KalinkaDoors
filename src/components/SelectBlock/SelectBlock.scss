@@ -1,10 +1,13 @@
 .SelectBlock {
     display: flex;
     align-items: center;
+    margin-right: 20px;
+    width: 100%;
 
     .selectLabel {
         margin-right: 15px;
         font-weight: 400;
+        text-wrap: nowrap;
     }
 
     .helpIcon {

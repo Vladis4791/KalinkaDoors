@@ -1,76 +1,95 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { doorsAPI } from "../../../APIs/doors.api";
 import { Door } from "../../../interfaces/Door.interface";
 import QuestionTemplate from "../../../components/QuestionTemplate/QuestionTemplate";
 import CheckboxGroup from "../../../components/CheckboxGroup/CheckboxGroup";
-import Select from "../../../components/Select/Select";
 import SelectBlock from "../../../components/SelectBlock/SelectBlock";
 import { useDoors } from "../../../hooks/useDoors";
 import SecondaryButton from "../../../components/SecondaryButton/SecondaryButton";
 import PrimaryButton from "../../../components/PrimaryButton/PrimaryButton";
 import { FixationTypeState } from "../../../interfaces/FixationTypeState.interface";
+import "./DifferentFixationTypesOnObject.scss";
+import { FixationType } from "../../../interfaces/DoorComponents.interface";
+import { fixationTypesStateAPI } from "../../../APIs/fixationTypesState.api";
+import CheckboxGroupControl from "../../../components/CheckboxGroupControl/CheckboxGroupControl";
 
 const DifferentFixationTypesOnObject = () => {
 	const doors = useDoors();
 
 	const [checkedDoorsIds, setCheckedDoorsIds] = useState<string[]>([]);
 	const [fixationTypeState, setFixationTypeState] =
-		useState<FixationTypeState>(doorsAPI.getFixationTypeState());
-
+		useState<FixationTypeState>(
+			fixationTypesStateAPI.getFixationTypeState()
+		);
 
 	const { tongueDoorsIds, magnitDoorsIds } = fixationTypeState;
-    console.log(fixationTypeState)
-    console.log(tongueDoorsIds, magnitDoorsIds);
+
 	const remainingDoors = doors.filter(
-		(door) =>
+		(door: Door) =>
 			!(
 				tongueDoorsIds.includes(door.id) ||
 				magnitDoorsIds.includes(door.id)
 			)
 	);
 
-	const [fixationType, setFixationType] = useState("Язычок");
+	const [fixationType, setFixationType] = useState<FixationType>(
+		FixationType.TONGUE
+	);
 
 	const onConfirmed = () => {
-		const newFixationTypeState = structuredClone(fixationTypeState);
-		console.log(checkedDoorsIds);
-		if (fixationType === "Язычок") {
-			newFixationTypeState.tongueDoorsIds = [
-				...newFixationTypeState.tongueDoorsIds,
+		if (fixationType === FixationType.TONGUE) {
+			fixationTypesStateAPI.setTongueDoorsIds([
+				...fixationTypeState.tongueDoorsIds,
 				...checkedDoorsIds,
-			];
-		} else if (fixationType === "Магнит") {
-			newFixationTypeState.magnitDoorsIds = [
-				...newFixationTypeState.magnitDoorsIds,
+			]);
+		} else if (fixationType === FixationType.MAGNIT) {
+			fixationTypesStateAPI.setMagnitDoorsIds([
+				...fixationTypeState.magnitDoorsIds,
 				...checkedDoorsIds,
-			];
+			]);
 		}
 
-		setFixationTypeState(newFixationTypeState);
+		setFixationTypeState(fixationTypesStateAPI.getFixationTypeState());
 		setCheckedDoorsIds([]);
-		doorsAPI.updateFixationTypeState(newFixationTypeState);
 	};
 
 	const onShowModal = () => {
-		console.log("modal");
-		doorsAPI.SetupFixationTypeState();
+		fixationTypesStateAPI.SetupFixationTypeState();
+		setFixationTypeState(fixationTypesStateAPI.getFixationTypeState());
 		setCheckedDoorsIds([]);
 	};
 
-	const controlBlock = (
-		<>
-			<SelectBlock
-				optionsWithImages={[
-					{ optionName: "Язычок", imageURL: "" },
-					{ optionName: "Магнит", imageURL: "" },
-				]}
-				value={fixationType}
-				selectLabel="Тип фиксации"
-				onChange={(option) => setFixationType(option)}
-			/>
+	const checkAllDoors = () => {
+		const allCheckedDoorsIds = remainingDoors.map((door) => door.id);
+		setCheckedDoorsIds(allCheckedDoorsIds);
+	};
 
-			<div className="controlBlock">
+    const uncheckAllDoors = () => {
+        setCheckedDoorsIds([])
+    }
+
+	const controlBlock = (
+		<div className="fixationTypeControlBlock">
+			<CheckboxGroupControl
+				doorsCount={checkedDoorsIds.length}
+				checkAllDoors={checkAllDoors}
+                uncheckAllDoors={uncheckAllDoors}
+                shouldCheckAllDoors={remainingDoors.length !== checkedDoorsIds.length}
+			/>
+			<div className="mainPart">
+				<SelectBlock
+					optionsWithImages={[
+						{ optionName: FixationType.TONGUE, imageURL: "" },
+						{ optionName: FixationType.MAGNIT, imageURL: "" },
+					]}
+					value={fixationType}
+					selectLabel="Тип фиксации"
+					onChange={(option) =>
+						setFixationType(option as FixationType)
+					}
+				/>
+
 				<div className="controlButtons">
 					<SecondaryButton
 						onClick={onConfirmed}
@@ -82,7 +101,7 @@ const DifferentFixationTypesOnObject = () => {
 					/>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 
 	return (
@@ -91,10 +110,11 @@ const DifferentFixationTypesOnObject = () => {
 			questionDescription="Выберите двери из списка и установить для них тип фиксации"
 			onSubmit={() => {}}
 			fixedBlock={controlBlock}
+			questionClassName="fixedQuestionBlock"
 		>
 			<CheckboxGroup
 				doors={remainingDoors}
-				initialCheckedDoorsIds={checkedDoorsIds}
+				checkedDoorsIds={checkedDoorsIds}
 				onChange={(checkedDoorsIds) =>
 					setCheckedDoorsIds(checkedDoorsIds)
 				}

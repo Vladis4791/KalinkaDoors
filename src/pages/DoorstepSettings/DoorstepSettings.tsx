@@ -24,6 +24,7 @@ const DoorstepSettings = () => {
 		>
 			<CheckboxGroup
 				doors={doors}
+                checkedDoorsIds={checkedDoorsIds}
 				onChange={(checkedDoorsIds) => setCheckedDoorsIds(checkedDoorsIds)}
 			/>
 		</QuestionTemplate>

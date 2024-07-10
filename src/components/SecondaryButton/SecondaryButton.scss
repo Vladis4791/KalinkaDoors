@@ -1,10 +1,8 @@
 @use '../../styles/colors' as c;
+@use '../../styles/mixins' as m;
 
 .secondaryButton {
-    background-color: c.$secondary-theme-color;
-    display: block;
 
-    &:hover {
-        background-color: darken(c.$secondary-theme-color, 3%);
-    }
+    @include m.buttonStyle(c.$secondary-theme-color)
+
 }
