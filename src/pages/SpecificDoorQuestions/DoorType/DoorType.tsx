@@ -11,7 +11,12 @@ const DoorType = () => {
 
 	const door = useOutletContext<Door>();
 
-    const onSubmit = () => {  
+    useEffect(() => {
+        const initialDoorVariation = door?.doorInfo.type ?? null;
+        setDoorVariation(initialDoorVariation);
+    }, [door]);
+
+    const onSubmit = () => { 
         door.doorInfo.type = doorVariation;
         doorsAPI.updateDoor(door);
     }
@@ -21,7 +26,7 @@ const DoorType = () => {
 			questionName="Выберите тип двери"
 			onSubmit={onSubmit}
 			settingsSectionName={`Настройка двери ${door ? `"Дверь ${door.id}` : ""}"`}
-			nextPageRoute={`/settings/${door?.id}/state`}
+			nextPageRoute={`../state`}
 			previousPageRoute="/doorsList"
 			isLoading={!door}
 		>

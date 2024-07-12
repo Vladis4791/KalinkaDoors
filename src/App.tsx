@@ -15,6 +15,7 @@ import OneFixationTypeOnObjectSetting from "./pages/FixationType/OneFixationType
 import DifferentFixationTypesOnObject from "./pages/FixationType/DifferentFixationTypesOnObject/DifferentFixationTypesOnObject";
 import DoorsWithLockingSelection from "./pages/LockingType/DoorsWithLockingSelection/DoorsWithLockingSelection";
 import DifferentLockingTypes from "./pages/LockingType/DifferentLockingTypes/DifferentLockingTypes";
+import DoorSize from "./pages/SpecificDoorQuestions/DoorSize/DoorSize";
 
 function App() {
 	return (
@@ -29,9 +30,36 @@ function App() {
 				>
 					<Route path="type" element={<DoorType />} />
 					<Route path="state" element={<DoorStateQuestion />} />
-					<Route path="depth" element={<Depth />} />
-					<Route path="width" element={<Width />} />
-					<Route path="height" element={<Height />} />
+					<Route
+						path="depth"
+						element={
+							<DoorSize
+								dimension="depth"
+								previousPageRoute="../state"
+								nextPageRoute="../width"
+							/>
+						}
+					/>
+					<Route
+						path="width"
+						element={
+							<DoorSize
+								dimension="width"
+								previousPageRoute="../depth"
+								nextPageRoute="../height"
+							/>
+						}
+					/>
+					<Route
+						path="height"
+						element={
+							<DoorSize
+								dimension="height"
+								previousPageRoute="../width"
+								nextPageRoute="/doorsList"
+							/>
+						}
+					/>
 				</Route>
 				<Route path="doorsteps" element={<DoorstepSettings />} />
 				<Route
@@ -54,7 +82,6 @@ function App() {
 					path="differentLockingTypes"
 					element={<DifferentLockingTypes />}
 				/>
-				
 			</Routes>
 		</div>
 	);

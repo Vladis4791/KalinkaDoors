@@ -10,26 +10,24 @@ export interface Door {
 export interface DoorInfo {
 	type: DoorVariation;
 	currentState: DoorState;
-	size: DoorwaySize | DoorSize;
+	size: Size;
 }
 
-interface DoorwaySize {
-	width: number;
+interface Size {
+    width: number;
 	height: number;
 	depth: number;
 }
 
-interface DoorSize {
-	doorWidth: number;
-	doorHeight: number;
-	doorwayDepth: number;
-}
+// interface DoorwaySize {
+// 	width: number;
+// 	height: number;
+// 	depth: number;
+// }
 
-export interface DoorWithComponents extends Door {
-	components: DoorComponents;
-	// doorInfo:
-}
-
-// export interface DoorTotals extends DoorWithComponents, DoorInfo {}
-
+// interface DoorSize {
+// 	doorWidth: number;
+// 	doorHeight: number;
+// 	doorwayDepth: number;
+// }
 

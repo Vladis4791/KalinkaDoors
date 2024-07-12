@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import PrimaryButton from "../PrimaryButton/PrimaryButton";
-import SecondaryButton from "../SecondaryButton/SecondaryButton";
 import "./QuestionTemplate.scss";
 import IconButton from "../IconButton/IconButton";
 import close from "../../assets/close.svg";
@@ -9,12 +6,12 @@ import Loading from "../Loading/Loading";
 import PrimaryLink from "../PrimaryLink/PrimaryLink";
 import SecondaryLink from "../SecondaryLink/SecondaryLink";
 
-interface QuestionTemplateInterface {
+export interface QuestionTemplateInterface {
 	questionName: string;
 	questionDescription?: string;
-	nextPageRoute?: string;
+	nextPageRoute: string;
+	previousPageRoute: string;
 	settingsSectionName?: string;
-	previousPageRoute?: string;
 	onSubmit: () => void;
 	children: React.ReactNode;
 	fixedBlock?: React.ReactNode;
