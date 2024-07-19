@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Door } from "../interfaces/Door.interface";
 
 export const useCheckboxGroup = (doorsInCheckboxGroup: Door[]) => {
+
+    const [confirmedDoorsIds, setConfirmedDoorsIds] = useState<string[]>([]);
 	const [checkedDoorsIds, setCheckedDoorsIds] = useState<string[]>([]);
 
 	const checkAllDoors = () => {
@@ -24,5 +26,7 @@ export const useCheckboxGroup = (doorsInCheckboxGroup: Door[]) => {
         setCheckedDoorsIds,
 		uncheckAllDoors,
 		shouldCheckAllDoors,
+        confirmedDoorsIds,
+        setConfirmedDoorsIds
 	} as const;
 };

@@ -5,14 +5,16 @@ import "./SecondaryButton.scss";
 const SecondaryButton = ({
 	onClick,
 	title,
-    className
+    className,
+    disabled = false
 }: {
 	onClick: () => void;
 	title: string;
-    className?: string
+    className?: string,
+    disabled?: boolean
 }) => {
 	return (
-		<Button onClick={onClick} className={`secondaryButton ${className}`}>
+		<Button onClick={onClick} className={`secondaryButton ${className}`} disabled={disabled}>
 			{title}
 		</Button>
 	);

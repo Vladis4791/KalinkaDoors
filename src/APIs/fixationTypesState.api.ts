@@ -1,3 +1,4 @@
+import { FixationType } from "../interfaces/DoorComponents.interface";
 import { FixationTypeState } from "../interfaces/FixationTypeState.interface";
 import { Storage } from "./storage.api";
 
@@ -9,31 +10,20 @@ class FixationTypesStateAPI {
 	}
 
 	public setShouldBeOneFixationTypeOnObject(value: boolean) {
+		this.storage.set("shouldBeOneFixationTypeOnObject", value);
+	}
+
+	public setOneFixationTypeOnObject(value: FixationType) {
 		this.storage.set("oneFixationTypeOnObject", value);
-	}
-
-	public setTongueDoorsIds(doorsIds: string[]) {
-		this.storage.set("tongueDoorsIds", doorsIds);
-	}
-
-	public setMagnitDoorsIds(doorsIds: string[]) {
-		this.storage.set("magnitDoorsIds", doorsIds);
 	}
 
 	public setupFixationTypeState() {
 		const fixationTypeState: FixationTypeState = {
-			oneFixationTypeOnObject: true,
-			tongueDoorsIds: [],
-			magnitDoorsIds: [],
+			oneFixationTypeOnObject: FixationType.TONGUE,
+			shouldBeOneFixationTypeOnObject: true,
 		};
 
-        this.storage.writeObject(fixationTypeState);
-		
-	}
-
-	public resetDoorsIds() {
-		this.setMagnitDoorsIds([]);
-		this.setTongueDoorsIds([]);
+		this.storage.writeObject(fixationTypeState);
 	}
 }
 

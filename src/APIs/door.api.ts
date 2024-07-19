@@ -53,6 +53,7 @@ export class DoorAPI {
 			magnitDoorsIds: [],
 		};
 
+        
 		this.storage.writeObject(fixationTypeState);
 	}
 

@@ -35,5 +35,5 @@ export interface DoorComponents {
 	handle: HandleType;
 	dobor: Dobor[];
 	doorBox: number;
-	platband: number; // possible change to PlatbandInterface
+	platband: number; // TODO possible change to PlatbandInterface
 }

@@ -1,0 +1,33 @@
+.ConfirmedDoorsSummary {
+    display: flex;
+    flex-direction: column;
+
+    .confirmedDoorsSummaryHeader {
+        font-size: 1.2rem;
+        font-weight: bold;
+        padding: 20px 0;
+        text-align: center;
+    }
+
+    .checkboxGroupBlock {
+        height: 50vh;
+        overflow-y: auto;
+        position: relative;
+        margin-bottom: 20px;
+    }
+
+    .checkboxesControl {
+        display: flex;
+        align-items: center;
+        margin-bottom: 30px;
+
+        :first-of-type {
+            flex-grow: 1;
+        }
+
+        .deleteButton {
+            width: 200px;
+            margin-left: 30px;
+        }
+    }
+}

@@ -7,7 +7,8 @@ import { useCheckboxGroup } from "../../../hooks/useCheckboxGroup";
 import { lockingTypeStateAPI } from "../../../APIs/lockingTypesState.api";
 
 const DoorsWithLockingSelection = () => {
-	const doors = useDoors();
+	const { doors } = useDoors();
+
 	const {
 		checkedDoorsIds,
 		checkAllDoors,
@@ -16,28 +17,31 @@ const DoorsWithLockingSelection = () => {
 		shouldCheckAllDoors,
 	} = useCheckboxGroup(doors);
 
+    const { doorsIdsThatRequiredLocking } = lockingTypeStateAPI.getLockingTypeState();
+
 	useEffect(() => {
 		const initialLockingTypeState =
 			lockingTypeStateAPI.getLockingTypeState();
 
-		const doorsIdsThatRequiredLocking =
-			initialLockingTypeState.doorsThatRequiredLocking.map(
-				(door) => door.id
-			);
-		setCheckedDoorsIds(doorsIdsThatRequiredLocking);
+
+        console.log(initialLockingTypeState)    
+		setCheckedDoorsIds(
+			initialLockingTypeState.doorsIdsThatRequiredLocking
+		);
 	}, [setCheckedDoorsIds]);
 
 	const onSubmit = () => {
-        const checkedDoors = doors.filter(door => checkedDoorsIds.includes(door.id));
-		lockingTypeStateAPI.setDoorsThatRequiredLocking(checkedDoors);
+		lockingTypeStateAPI.setDoorsIdsThatRequiredLocking(checkedDoorsIds);
 	};
+
+ const nextRoute = doorsIdsThatRequiredLocking.length === 0 ? "/reinforcedHingesSelection" : "/mainLockingPage";
 
 	return (
 		<QuestionTemplate
 			questionName="Настройка запирания"
 			questionDescription="Выберите двери, для которых необходимо запирание"
 			previousPageRoute="/doorsList"
-			nextPageRoute="/differentLockingTypes"
+			nextPageRoute={nextRoute}
 			questionFixedInSize={true}
 			onSubmit={onSubmit}
 			fixedBlock={

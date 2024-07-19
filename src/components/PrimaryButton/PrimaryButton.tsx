@@ -6,13 +6,15 @@ const PrimaryButton = ({
 	onClick,
 	title,
 	className,
+	disabled = false,
 }: {
 	onClick: () => void;
 	title: string;
 	className?: string;
+	disabled?: boolean;
 }) => {
 	return (
-		<Button onClick={onClick} className={`primaryButton ${className}`}>
+		<Button onClick={onClick} className={`primaryButton ${className}`} disabled={disabled}>
 			{title}
 		</Button>
 	);

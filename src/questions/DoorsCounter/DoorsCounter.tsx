@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import QuestionTemplate from "../../components/QuestionTemplate/QuestionTemplate";
 import NumberInput from "../../components/NumberInput/NumberInput";
-import { useNavigate } from "react-router-dom";
 import { doorsAPI } from "../../APIs/doors.api";
 import { fixationTypesStateAPI } from "../../APIs/fixationTypesState.api";
 import { lockingTypeStateAPI as lockingTypesStateAPI } from "../../APIs/lockingTypesState.api";

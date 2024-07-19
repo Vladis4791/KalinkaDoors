@@ -13,25 +13,16 @@ import SecondaryButton from "../../../components/SecondaryButton/SecondaryButton
 import PrimaryButton from "../../../components/PrimaryButton/PrimaryButton";
 
 const DifferentLockingTypes = () => {
-	const doors = lockingTypeStateAPI.getLockingTypeState().doorsThatRequiredLocking;
+	const { doors, updateDoors } = useDoors();
 
-	const [lockingTypeState, setLockingTypeState] = useState<LockingTypeState>(
-		lockingTypeStateAPI.getLockingTypeState()
-	);
+	const lockingTypeState = lockingTypeStateAPI.getLockingTypeState();
 
-	const {
-		turnButtonLockingDoorsIds,
-		keyFixatorDoorsIds,
-		twoEdgedKeysDoorsIds,
-	} = lockingTypeState;
+	const { doorsIdsThatRequiredLocking } = lockingTypeState;
 
 	const remainingDoors = doors.filter(
 		(door: Door) =>
-			!(
-				turnButtonLockingDoorsIds.includes(door.id) ||
-				twoEdgedKeysDoorsIds.includes(door.id) ||
-				keyFixatorDoorsIds.includes(door.id)
-			)
+			!door.components.lockingType &&
+			doorsIdsThatRequiredLocking.includes(door.id)
 	);
 
 	const {
@@ -40,42 +31,28 @@ const DifferentLockingTypes = () => {
 		uncheckAllDoors,
 		setCheckedDoorsIds,
 		shouldCheckAllDoors,
-	} = useCheckboxGroup(remainingDoors);
+	} = useCheckboxGroup([]);
 
 	const [lockingType, setLockingType] = useState<LockingType>(
 		LockingType.TURN_BUTTON
 	);
 
 	const onConfirmed = () => {
-		switch (lockingType) {
-			case LockingType.TURN_BUTTON:
-				lockingTypeStateAPI.setTurnButtonLockingDoorsIds([
-					...lockingTypeState.turnButtonLockingDoorsIds,
-					...checkedDoorsIds,
-				]);
-				break;
-			case LockingType.KEY_FIXATOR:
-				lockingTypeStateAPI.setKeyFixatorDoorsIds([
-					...lockingTypeState.keyFixatorDoorsIds,
-					...checkedDoorsIds,
-				]);
-				break;
-			case LockingType.TWO_EDGED_KEY:
-				lockingTypeStateAPI.setTwoEdgedKeysDoorsIds([
-					...lockingTypeState.twoEdgedKeysDoorsIds,
-					...checkedDoorsIds,
-				]);
-				break;
-		}
+		const newDoors = doors.map((door) => {
+			if (checkedDoorsIds.includes(door.id)) {
+				door.components.lockingType = lockingType;
+			}
 
-		setLockingTypeState(lockingTypeStateAPI.getLockingTypeState());
+			return door;
+		});
+
+		updateDoors(newDoors);
 		setCheckedDoorsIds([]);
 	};
 
 	const onShowModal = () => {
-        console.log("modal")
+		console.log("modal");
 		lockingTypeStateAPI.resetDoorsIds();
-		setLockingTypeState(lockingTypeStateAPI.getLockingTypeState());
 		setCheckedDoorsIds([]);
 	};
 
@@ -86,14 +63,23 @@ const DifferentLockingTypes = () => {
 				checkAllDoors={checkAllDoors}
 				uncheckAllDoors={uncheckAllDoors}
 				shouldCheckAllDoors={shouldCheckAllDoors}
-                disabled={remainingDoors.length === 0}
+				disabled={remainingDoors.length === 0}
 			/>
 			<div className="mainPart">
 				<SelectBlock
 					optionsWithImages={[
-						{ optionName: LockingType.TURN_BUTTON, imageURL: "" },
-						{ optionName: LockingType.KEY_FIXATOR, imageURL: "" },
-						{ optionName: LockingType.TWO_EDGED_KEY, imageURL: "" },
+						{
+							optionName: LockingType.TURN_BUTTON,
+							imageURL: "",
+						},
+						{
+							optionName: LockingType.KEY_FIXATOR,
+							imageURL: "",
+						},
+						{
+							optionName: LockingType.TWO_EDGED_KEY,
+							imageURL: "",
+						},
 					]}
 					value={lockingType}
 					selectLabel="Тип фиксации"
@@ -123,6 +109,7 @@ const DifferentLockingTypes = () => {
 			onSubmit={() => {}}
 			fixedBlock={controlBlock}
 			questionFixedInSize={true}
+			previousPageRoute="/doorsWithLockingSelection"
 			nextPageRoute="/doorsWithLockingSelection"
 		>
 			<CheckboxGroup

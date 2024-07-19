@@ -13,6 +13,7 @@ const CheckboxGroup = ({
 	checkedDoorsIds: string[];
 	onChange: (checkedDoorsIds: string[]) => void;
 }) => {
+
 	const onChecked = (id: string) => {
 		const isInCheckedDoors = checkedDoorsIds.includes(id);
 		let arr: string[];

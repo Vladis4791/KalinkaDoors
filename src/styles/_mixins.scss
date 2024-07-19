@@ -18,4 +18,9 @@
     &:hover {
         background-color: darken($backgroundColor, 3%);
     }
+
+    &:disabled {
+        background-color: #a09e9e;
+        cursor: default;
+    }
 }

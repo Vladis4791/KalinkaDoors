@@ -1,4 +1,5 @@
 import { Door } from "../interfaces/Door.interface";
+import { LockingType } from "../interfaces/DoorComponents.interface";
 import { LockingTypeState } from "../interfaces/LockingTypeState.interface";
 import { Storage } from "./storage.api";
 
@@ -9,38 +10,22 @@ class LockingTypeStateAPI {
 		return this.storage.getObject();
 	}
 
-	public setDoorsThatRequiredLocking(doors: Door[]) {
-		this.storage.set("doorsThatRequiredLocking", doors);
+	public setShouldBeOneFixationTypeOnObject(value: boolean) {
+		this.storage.set("oneLockingTypeOnObject", value);
 	}
 
-	public setTurnButtonLockingDoorsIds(doorsIds: string[]) {
-		this.storage.set("turnButtonLockingDoorsIds", doorsIds);
-	}
-
-	public setKeyFixatorDoorsIds(doorsIds: string[]) {
-		this.storage.set("keyFixatorDoorsIds", doorsIds);
-	}
-
-	public setTwoEdgedKeysDoorsIds(doorsIds: string[]) {
-		this.storage.set("twoEdgedKeysDoorsIds", doorsIds);
+	public setDoorsIdsThatRequiredLocking(doors: string[]) {
+		this.storage.set("doorsIdsThatRequiredLocking", doors);
 	}
 
 	public setupLockingTypeState() {
 		const newSetupLockingTypeState: LockingTypeState = {
-			oneLockingTypeOnObject: true,
-			doorsThatRequiredLocking: [],
-			turnButtonLockingDoorsIds: [],
-			keyFixatorDoorsIds: [],
-			twoEdgedKeysDoorsIds: [],
+			oneLockingTypeOnObject: LockingType.TURN_BUTTON,
+			shouldBeOneLockingTypeOnObject: true,
+			doorsIdsThatRequiredLocking: [],
 		};
 
 		this.storage.writeObject(newSetupLockingTypeState);
-	}
-
-	public resetDoorsIds() {
-		this.setTurnButtonLockingDoorsIds([]);
-        this.setKeyFixatorDoorsIds([]);
-        this.setTwoEdgedKeysDoorsIds([]);
 	}
 }
 

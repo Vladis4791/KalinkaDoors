@@ -7,31 +7,40 @@ class DoorsAPI {
 	private doors = this.storage.getObject();
 
 	public getAllDoors() {
-		return this.storage.getObject();
+		console.log("allDoors", this.doors);
+		return this.doors;
 	}
 
 	public getDoorById(doorId: string) {
-		const requiredDoor = this.doors.find(
-			(door: Door) => door.id === doorId
-		);
+		const requiredDoor = this.doors.find((door: Door) => door.id === doorId);
 
 		return requiredDoor;
 	}
 
-	// public updateDoorInfo(doorId: string, doorInfo: DoorInfo) {
-	//     const door = this.getDoorById(doorId);
-	//     door.doorInfo = doorInfo;
-	//     localStorage.setItem("doors", JSON.stringify(this.doors));
-	// }
+	public updateDoors = (newDoors: Door[]) => {
+		this.doors = newDoors;
+		localStorage.setItem("doors", JSON.stringify(this.doors));
+	};
 
 	public updateDoor(doorToUpdate: Door) {
-		const index = this.doors.findIndex(
-			(door) => door.id === doorToUpdate.id
-		);
+		const index = this.doors.findIndex((door) => door.id === doorToUpdate.id);
 		if (index !== -1) {
 			this.doors[index] = doorToUpdate;
 			localStorage.setItem("doors", JSON.stringify(this.doors));
 		}
+	}
+
+	public resetDoorsComponentToInitialValue(
+		componentName: keyof DoorComponents,
+		initialValue: 0 | null
+	) {
+
+		const newDoors = this.doors.map((door) => {
+			door.components[componentName] = initialValue as never;
+			return door;
+		});
+
+		this.updateDoors(newDoors);
 	}
 
 	public setupDoors(doorsCount: number) {
@@ -54,9 +63,8 @@ class DoorsAPI {
 		const door = {} as Door;
 		door.name = `Дверь ${doorId}`;
 		door.id = doorId.toString();
-		door.components = {} as DoorComponents;
+		door.components = this.getEmptyDoorComponent();
 		door.doorInfo = this.getEmptyDoorInfo();
-
 		return door;
 	};
 
@@ -72,6 +80,21 @@ class DoorsAPI {
 		};
 
 		return doorInfo;
+	};
+
+	private getEmptyDoorComponent = () => {
+		const doorComponents: DoorComponents = {
+			doorPanel: 1,
+			doorstep: 0,
+			fixationType: null,
+			lockingType: null,
+			handle: null,
+			dobor: [],
+			doorBox: 1,
+			platband: 0,
+		};
+
+		return doorComponents;
 	};
 }
 

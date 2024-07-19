@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 import QuestionTemplate from "../../components/QuestionTemplate/QuestionTemplate";
-import { Door } from "../../interfaces/Door.interface";
-import { doorsAPI } from "../../APIs/doors.api";
-import Checkbox from "../../components/Checkbox/Checkbox";
 import "./DoorstepSettings.scss";
 import CheckboxGroup from "../../components/CheckboxGroup/CheckboxGroup";
 import { useDoors } from "../../hooks/useDoors";
@@ -10,7 +7,7 @@ import { useCheckboxGroup } from "../../hooks/useCheckboxGroup";
 import CheckboxGroupControl from "../../components/CheckboxGroupControl/CheckboxGroupControl";
 
 const DoorstepSettings = () => {
-	const doors = useDoors();
+	const { doors, updateDoors } = useDoors();
 
 	const {
 		checkedDoorsIds,
@@ -19,6 +16,22 @@ const DoorstepSettings = () => {
 		uncheckAllDoors,
 		shouldCheckAllDoors,
 	} = useCheckboxGroup(doors);
+
+	useEffect(() => {
+		const previouslyCheckedDoorsIds = doors
+			.filter((door) => door.components.doorstep === 1)
+			.map((door) => door.id);
+        setCheckedDoorsIds(previouslyCheckedDoorsIds);
+	}, [doors, setCheckedDoorsIds]);
+
+	const onSubmit = () => {
+		const newDoors = doors.map((door) => {
+			door.components.doorstep = checkedDoorsIds.includes(door.id) ? 1 : 0;
+			return door;
+		});
+
+		updateDoors(newDoors);
+	};
 
 	return (
 		<QuestionTemplate
@@ -35,14 +48,12 @@ const DoorstepSettings = () => {
 					shouldCheckAllDoors={shouldCheckAllDoors}
 				/>
 			}
-			onSubmit={() => {}}
+			onSubmit={onSubmit}
 		>
 			<CheckboxGroup
 				doors={doors}
 				checkedDoorsIds={checkedDoorsIds}
-				onChange={(checkedDoorsIds) =>
-					setCheckedDoorsIds(checkedDoorsIds)
-				}
+				onChange={(checkedDoorsIds) => setCheckedDoorsIds(checkedDoorsIds)}
 			/>
 		</QuestionTemplate>
 	);

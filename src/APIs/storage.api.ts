@@ -7,7 +7,7 @@ export class Storage<T> {
 		this.objectNameInStorage = objectName;
 	}
 
-	public set(property: string, value: unknown) {
+	public set(property: keyof T, value: T[keyof T]) {
 		this.object[property] = value;
 		localStorage.setItem(
 			this.objectNameInStorage,

@@ -1,9 +1,7 @@
-import { Door } from "./Door.interface";
+import { LockingType } from "./DoorComponents.interface";
 
 export interface LockingTypeState {
-    oneLockingTypeOnObject: boolean;
-    doorsThatRequiredLocking: Door[];
-    turnButtonLockingDoorsIds: string[];
-    keyFixatorDoorsIds: string[];
-    twoEdgedKeysDoorsIds: string[];
+    shouldBeOneLockingTypeOnObject: boolean;
+    oneLockingTypeOnObject: LockingType;
+    doorsIdsThatRequiredLocking: string[];
 }

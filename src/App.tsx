@@ -16,6 +16,8 @@ import DifferentFixationTypesOnObject from "./pages/FixationType/DifferentFixati
 import DoorsWithLockingSelection from "./pages/LockingType/DoorsWithLockingSelection/DoorsWithLockingSelection";
 import DifferentLockingTypes from "./pages/LockingType/DifferentLockingTypes/DifferentLockingTypes";
 import DoorSize from "./pages/SpecificDoorQuestions/DoorSize/DoorSize";
+import OneLockingType from "./pages/LockingType/OneLockingType/OneLockingType";
+import MainLockingTypePage from "./pages/LockingType/MainLockingTypePage";
 
 function App() {
 	return (
@@ -24,10 +26,7 @@ function App() {
 				<Route path="/" element={<HomePage />} />
 				<Route path="doorsCounter" element={<DoorsCounter />} />
 				<Route path="doorsList" element={<DoorsList />} />
-				<Route
-					path="settings/:doorId"
-					element={<CurrentDoorSettings />}
-				>
+				<Route path="settings/:doorId" element={<CurrentDoorSettings />}>
 					<Route path="type" element={<DoorType />} />
 					<Route path="state" element={<DoorStateQuestion />} />
 					<Route
@@ -62,14 +61,8 @@ function App() {
 					/>
 				</Route>
 				<Route path="doorsteps" element={<DoorstepSettings />} />
-				<Route
-					path="fixationTypeSelection"
-					element={<MainFixationTypePage />}
-				/>
-				<Route
-					path="oneFixationType"
-					element={<OneFixationTypeOnObjectSetting />}
-				/>
+				<Route path="fixationTypeSelection" element={<MainFixationTypePage />} />
+				<Route path="oneFixationType" element={<OneFixationTypeOnObjectSetting />} />
 				<Route
 					path="differentFixationTypes"
 					element={<DifferentFixationTypesOnObject />}
@@ -78,9 +71,20 @@ function App() {
 					path="doorsWithLockingSelection"
 					element={<DoorsWithLockingSelection />}
 				/>
+
+				<Route
+					path="mainLockingPage"
+					element={<MainLockingTypePage />}
+				/>
 				<Route
 					path="differentLockingTypes"
 					element={<DifferentLockingTypes />}
+				/>
+
+				<Route path="oneLockingType" element={<OneLockingType />} />
+				<Route
+					path="reinforcedHingesSelection"
+					element={<DoorsWithLockingSelection />}
 				/>
 			</Routes>
 		</div>

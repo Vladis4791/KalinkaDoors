@@ -2,10 +2,16 @@ import React, { useRef, useState } from "react";
 import RadioButton from "../../components/RadioButton/RadioButton";
 import QuestionTemplate from "../../components/QuestionTemplate/QuestionTemplate";
 import { fixationTypesStateAPI } from "../../APIs/fixationTypesState.api";
+import { useDoors } from "../../hooks/useDoors";
+import { doorsAPI } from "../../APIs/doors.api";
+import { LockingType } from "../../interfaces/DoorComponents.interface";
 
 const MainFixationTypePage = () => {
+
+    const { doors, updateDoors } = useDoors();
+
 	const initialShouldBeOneFixationTypeOnObject =
-		fixationTypesStateAPI.getFixationTypeState().oneFixationTypeOnObject;
+		fixationTypesStateAPI.getFixationTypeState().shouldBeOneFixationTypeOnObject;
 
 	const previousInitialShouldBeOneFixationTypeOnObject = useRef(
 		initialShouldBeOneFixationTypeOnObject
@@ -16,12 +22,13 @@ const MainFixationTypePage = () => {
 		setOnShouldBeOneFixationTypeOnObject,
 	] = useState(initialShouldBeOneFixationTypeOnObject);
 
+
 	const onSubmit = () => {
 		if (
 			shouldBeOneFixationTypeOnObject !==
 			previousInitialShouldBeOneFixationTypeOnObject.current
 		) {
-            fixationTypesStateAPI.resetDoorsIds();
+            doorsAPI.resetDoorsComponentToInitialValue("fixationType", null);
         }
         
         fixationTypesStateAPI.setShouldBeOneFixationTypeOnObject(
@@ -43,7 +50,7 @@ const MainFixationTypePage = () => {
 		>
 			<>
 				<RadioButton
-					radioButtonName="Один тип запирания на весь объект"
+					radioButtonName="Один тип фиксации на весь объект"
 					groupName="fixationTypesOnObject"
 					checked={shouldBeOneFixationTypeOnObject}
 					onChange={() =>
@@ -53,7 +60,7 @@ const MainFixationTypePage = () => {
 					}
 				/>
 				<RadioButton
-					radioButtonName="Разные типы запирания"
+					radioButtonName="Разные типы фиксации"
 					groupName="fixationTypesOnObject"
 					checked={!shouldBeOneFixationTypeOnObject}
 					onChange={() =>

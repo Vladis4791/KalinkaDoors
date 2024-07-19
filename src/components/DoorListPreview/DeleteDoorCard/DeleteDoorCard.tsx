@@ -1,6 +1,6 @@
 import React from 'react'
-import IconButton from '../../IconButton/IconButton'
-import delete from '../../assets/';
+// import IconButton from '../../IconButton/IconButton'
+// import delete from '../../assets/';
 
 const DeleteDoorCard = () => {
   return (
