@@ -24,3 +24,10 @@
         cursor: default;
     }
 }
+
+@mixin RowStyle {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    padding: 15px;
+    padding-left: 20pz;
+}

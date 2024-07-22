@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "../Modal/Modal";
 
 const ModalWithButton = ({
@@ -10,11 +10,21 @@ const ModalWithButton = ({
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
 
+    // useEffect(() => {
+    //     console.log("mount modal")
+    //     return () => {
+    //         console.log("unmount")
+    //     }
+    // }, [])
+
+    // useEffect(() => console.log("rerender"))
+
 	const onClick = () => { 
 		setIsOpen(true);
 	};
 
     const onClose = () => {
+        console.log("onclose")
         setIsOpen(false);
     }
 

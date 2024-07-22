@@ -28,7 +28,7 @@ const MainFixationTypePage = () => {
 			shouldBeOneFixationTypeOnObject !==
 			previousInitialShouldBeOneFixationTypeOnObject.current
 		) {
-            doorsAPI.resetDoorsComponentToInitialValue("fixationType", null);
+            doorsAPI.resetAllDoorsComponentToInitialValue("fixationType", null);
         }
         
         fixationTypesStateAPI.setShouldBeOneFixationTypeOnObject(

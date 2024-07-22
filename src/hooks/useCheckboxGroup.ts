@@ -20,6 +20,13 @@ export const useCheckboxGroup = (doorsInCheckboxGroup: Door[]) => {
 	const shouldCheckAllDoors =
 		doorsInCheckboxGroup.length !== checkedDoorsIds.length;
 
+    const removeIdsFromConfirmedDoorsIds = (idsToRemove: string[]) => {
+        const newConfirmedDoors = confirmedDoorsIds.filter(
+			(doorId) => !idsToRemove.includes(doorId)
+		);
+		setConfirmedDoorsIds(newConfirmedDoors);
+    }
+
 	return {
 		checkedDoorsIds,
 		checkAllDoors,
@@ -27,6 +34,7 @@ export const useCheckboxGroup = (doorsInCheckboxGroup: Door[]) => {
 		uncheckAllDoors,
 		shouldCheckAllDoors,
         confirmedDoorsIds,
-        setConfirmedDoorsIds
+        setConfirmedDoorsIds,
+        removeIdsFromConfirmedDoorsIds
 	} as const;
 };

@@ -4,6 +4,7 @@ import NumberInput from "../../components/NumberInput/NumberInput";
 import { doorsAPI } from "../../APIs/doors.api";
 import { fixationTypesStateAPI } from "../../APIs/fixationTypesState.api";
 import { lockingTypeStateAPI as lockingTypesStateAPI } from "../../APIs/lockingTypesState.api";
+import { addedComponentsAPI } from "../../APIs/addedComponents.api";
 
 
 const DoorsCounter = () => {
@@ -13,6 +14,7 @@ const DoorsCounter = () => {
 		doorsAPI.setupDoors(doorsCount);
         fixationTypesStateAPI.setupFixationTypeState();
         lockingTypesStateAPI.setupLockingTypeState();
+        addedComponentsAPI.setupAddedComponents(); 
 	};
 
 	return (

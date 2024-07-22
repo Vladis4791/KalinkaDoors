@@ -7,7 +7,7 @@ class DoorsAPI {
 	private doors = this.storage.getObject();
 
 	public getAllDoors() {
-		console.log("allDoors", this.doors);
+		// console.log("allDoors", this.doors);
 		return this.doors;
 	}
 
@@ -30,11 +30,30 @@ class DoorsAPI {
 		}
 	}
 
-	public resetDoorsComponentToInitialValue(
+    public getDoorsByComponentValue(componentName: keyof DoorComponents, value: unknown) {
+        return this.doors.filter((door) => door.components[componentName] === value);
+    }
+
+	public setSpecificDoorsComponentToInitialValue(
+		componentName: keyof DoorComponents,
+		initialValue: unknown,
+		doorsIds: string[]
+	) {
+		const newDoors = this.doors.map((door) => {
+            if(doorsIds.includes(door.id)) {
+                door.components[componentName] = initialValue as never;
+            }
+			
+			return door;
+		});
+
+		this.updateDoors(newDoors);
+	}
+
+	public resetAllDoorsComponentToInitialValue(
 		componentName: keyof DoorComponents,
 		initialValue: 0 | null
 	) {
-
 		const newDoors = this.doors.map((door) => {
 			door.components[componentName] = initialValue as never;
 			return door;

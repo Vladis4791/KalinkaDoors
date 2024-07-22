@@ -14,7 +14,7 @@ import { fixationTypesStateAPI } from "../../../APIs/fixationTypesState.api";
 import CheckboxGroupControl from "../../../components/CheckboxGroupControl/CheckboxGroupControl";
 import { useCheckboxGroup } from "../../../hooks/useCheckboxGroup";
 import ModalWithButton from "../../../components/ModalWithButton/ModalWithButton";
-import CheckedDoorsSummary from "../../../components/ConfirmedDoorsSummary/ConfirmedDoorsSummary";
+import ConfirmedDoorsSummary from "../../../components/ConfirmedDoorsSummary/ConfirmedDoorsSummary";
 
 const DifferentFixationTypesOnObject = () => {
 	const { doors, updateDoors } = useDoors();
@@ -31,57 +31,58 @@ const DifferentFixationTypesOnObject = () => {
 		shouldCheckAllDoors,
 		confirmedDoorsIds,
 		setConfirmedDoorsIds,
+        removeIdsFromConfirmedDoorsIds
 	} = useCheckboxGroup(remainingDoors);
 
 	const [fixationType, setFixationType] = useState<FixationType>(FixationType.TONGUE);
 
 	const onConfirmed = () => {
-		const newDoors = doors.map((door) => {
-			if (checkedDoorsIds.includes(door.id)) {
-				door.components.fixationType = fixationType;
-			}
-
-			return door;
-		});
-
-		updateDoors(newDoors);
+		doorsAPI.setSpecificDoorsComponentToInitialValue(
+			"fixationType",
+			fixationType,
+			checkedDoorsIds
+		);
 		setConfirmedDoorsIds([...confirmedDoorsIds, ...checkedDoorsIds]);
 		setCheckedDoorsIds([]);
 	};
 
-	const getDoorsWithCurrentFixationType = () => {
-		return doors.filter((door) => door.components.fixationType === fixationType);
+``
+	const updateDeletedDoors = (deletedDoorsIds: string[]) => {
+        doorsAPI.setSpecificDoorsComponentToInitialValue("fixationType", null, deletedDoorsIds);
 	};
 
-    const updateDeletedDoors = (deletedDoorsIds: string[]) => {
-        const newDoors = doors.map(door => {
-            if(deletedDoorsIds.includes(door.id)) {
-                door.components.fixationType = null;
-            }
-            return door;
-        })
-        updateDoors(newDoors);
-    }
 
-    const updateConfirmedDoors = (deletedDoorsIds: string[]) => {
-        const newConfirmedDoors = confirmedDoorsIds.filter(
-			(doorId) => !deletedDoorsIds.includes(doorId)
-		);
-		setConfirmedDoorsIds(newConfirmedDoors);
-    }
 	const onDelete = (deletedDoorsIds: string[]) => {
-		updateConfirmedDoors(deletedDoorsIds);
-        updateDeletedDoors(deletedDoorsIds);
+		removeIdsFromConfirmedDoorsIds(deletedDoorsIds);
+		updateDeletedDoors(deletedDoorsIds);
 	};
 
-	const onShowModal = () => {
-		doorsAPI.resetDoorsComponentToInitialValue("fixationType", null);
+	const resetAllDoors = () => {
+		doorsAPI.resetAllDoorsComponentToInitialValue("fixationType", null);
 		setCheckedDoorsIds([]);
 	};
 
+	const ConfirmedDoorsSummaryModal = (
+		<ModalWithButton
+			renderButton={(onClick) => (
+				<PrimaryButton
+					onClick={onClick}
+					title={`Посмотреть список (${fixationType})`}
+				/>
+			)}
+			renderModalContent={() => (
+				<ConfirmedDoorsSummary
+					header={`Двери с типом фиксации "${fixationType}"`}
+					doorsInSummary={doorsAPI.getDoorsByComponentValue("fixationType", fixationType)}
+					onDelete={onDelete}
+				/>
+			)}
+		/>
+	);
+
 	const controlBlock = (
 		<div className="fixationTypeControlBlock">
-			<button onClick={onShowModal}>reset</button>
+			<button onClick={resetAllDoors}>reset</button>
 			<CheckboxGroupControl
 				doorsCount={checkedDoorsIds.length}
 				checkAllDoors={checkAllDoors}
@@ -101,24 +102,17 @@ const DifferentFixationTypesOnObject = () => {
 
 				<div className="controlButtons">
 					<SecondaryButton onClick={onConfirmed} title="Подтвердить" />
-					<ModalWithButton
-						renderButton={(onClick) => (
-							<PrimaryButton
-								onClick={onClick}
-								title={`Посмотреть список (${fixationType})`}
-							/>
-						)}
-						renderModalContent={() => (
-							<CheckedDoorsSummary
-								header={`Двери с типом фиксации "${fixationType}"`}
-								doorsInSummary={getDoorsWithCurrentFixationType()}
-								onDelete={onDelete}
-							/>
-						)}
-					/>
+					{ConfirmedDoorsSummaryModal}
 				</div>
 			</div>
 		</div>
+	);
+
+	const emptyListMessage = (
+		<>
+			<h3>Все двери настроены!</h3>
+			{ConfirmedDoorsSummaryModal}
+		</>
 	);
 
 	return (
@@ -133,6 +127,7 @@ const DifferentFixationTypesOnObject = () => {
 		>
 			<CheckboxGroup
 				doors={remainingDoors}
+				emptyListMessage={emptyListMessage}
 				checkedDoorsIds={checkedDoorsIds}
 				onChange={(checkedDoorsIds) => setCheckedDoorsIds(checkedDoorsIds)}
 			/>

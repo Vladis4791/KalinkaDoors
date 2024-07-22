@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./NumberInput.scss";
 import { InputNumber } from "primereact/inputnumber";
-import './NumberInput.scss';
+import "./NumberInput.scss";
 
 const NumberInput = ({
 	value,
@@ -18,14 +18,10 @@ const NumberInput = ({
 	fractionDigits?: number;
 	inputLabel?: string;
 }) => {
-
-    useEffect(() => console.log("mount input number"), [])
-
 	return (
 		<div className="NumberInputBlock">
-			
 			<InputNumber
-                inputId={inputLabel}
+				inputId={inputLabel}
 				value={value}
 				onValueChange={(e) => onChange(e.value)}
 				min={min}
@@ -33,7 +29,11 @@ const NumberInput = ({
 				maxFractionDigits={fractionDigits}
 				className="numberInput"
 			/>
-            { inputLabel ? <label className="inputLabel" htmlFor={inputLabel}>{inputLabel}</label> : null }
+			{inputLabel ? (
+				<label className="inputLabel" htmlFor={inputLabel}>
+					{inputLabel}
+				</label>
+			) : null}
 		</div>
 	);
 };

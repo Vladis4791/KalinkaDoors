@@ -1,0 +1,18 @@
+.lockingTypeControlBlock {
+	.checkboxGroupControl {
+        margin-bottom: 15px;
+	}
+	.mainPart {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 20px;
+
+		.controlButtons {
+			display: flex;
+
+			& :first-of-type {
+				margin-right: 15px;
+			}
+		}
+	}
+}

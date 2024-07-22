@@ -4,6 +4,7 @@ import { doorsAPI } from "../../APIs/doors.api";
 import DoorCard from "./DoorCard/DoorCard";
 import "./DoorsList.scss";
 import SecondaryLink from "../../components/SecondaryLink/SecondaryLink";
+import PrimaryLink from "../../components/PrimaryLink/PrimaryLink";
 
 const DoorsList = () => {
 	const [doors, setDoors] = useState<Door[]>([]);
@@ -45,6 +46,9 @@ const DoorsList = () => {
 				<SecondaryLink to="/doorsteps">
 					Подобрать доп. комплектующие
 				</SecondaryLink>
+                <PrimaryLink to="/summary">
+                    Перейти к итоговому списку
+                </PrimaryLink>
 			</div>
 		</div>
 	);

@@ -23,11 +23,17 @@ const ConfirmedDoorsSummary = ({
 		shouldCheckAllDoors,
 	} = useCheckboxGroup(doorsInSummary);
 
+    const onSubmit = () => {
+        onDelete(checkedDoorsIds);
+        setCheckedDoorsIds([]);
+    }
+
 	return (
 		<div className="ConfirmedDoorsSummary">
 			<h2 className="confirmedDoorsSummaryHeader">{header}</h2>
 			<div className="checkboxGroupBlock">
 				<CheckboxGroup
+					emptyListMessage={<h3>Двери не были выбраны для данной категории</h3>}
 					doors={doorsInSummary}
 					checkedDoorsIds={checkedDoorsIds}
 					onChange={(checkedDoorsIds) => setCheckedDoorsIds(checkedDoorsIds)}
@@ -35,13 +41,14 @@ const ConfirmedDoorsSummary = ({
 			</div>
 			<div className="checkboxesControl">
 				<CheckboxGroupControl
+					disabled={doorsInSummary.length === 0}
 					doorsCount={checkedDoorsIds.length}
 					checkAllDoors={checkAllDoors}
 					uncheckAllDoors={uncheckAllDoors}
 					shouldCheckAllDoors={shouldCheckAllDoors}
 				/>
 				<PrimaryButton
-					onClick={() => onDelete(checkedDoorsIds)}
+					onClick={onSubmit}
 					title="Удалить выбранное"
 					className="deleteButton"
 					disabled={checkedDoorsIds.length === 0}

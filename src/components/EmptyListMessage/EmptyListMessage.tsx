@@ -1,20 +1,18 @@
 import React from "react";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
-import './EmptylistMessage.scss';
+import "./EmptylistMessage.scss";
 
 const EmptyListMessage = ({
-	openResultListInModal,
+	emptyListMessageContent,
+    isHidden
 }: {
-	openResultListInModal: () => void;
+	emptyListMessageContent?: React.ReactNode;
+    isHidden: boolean
 }) => {
 	return (
-		<div className="EmptyListMessage">
+		<div className={`EmptyListMessage ${isHidden ? "hidden" : ""}`}>
 			<div className="messageContent">
-				<h3>Все двери настроены!</h3>
-				<PrimaryButton
-					title="Посмотреть список"
-					onClick={openResultListInModal}
-				/>
+                { emptyListMessageContent }
 			</div>
 		</div>
 	);

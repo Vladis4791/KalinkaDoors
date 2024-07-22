@@ -31,7 +31,7 @@ const MainLockingTypePage = () => {
 
 	return (
 		<QuestionTemplate
-			questionName="Настройка типа фиксации"
+			questionName="Настройка типа запирания"
 			questionDescription="Выберите ваш случай"
 			onSubmit={onSubmit}
 			previousPageRoute="/doorsteps"

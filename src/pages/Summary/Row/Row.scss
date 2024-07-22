@@ -1,0 +1,52 @@
+@use "../../../styles/colors" as c;
+@use "../../../styles/mixins" as m;
+
+.tableRow {
+    @include m.RowStyle;
+	border: 1px solid c.$border-color;
+	border-top: none;
+	font-weight: 500;
+
+	.componentName {
+		display: flex;
+		align-items: center;
+	}
+
+	.componentAmount {
+		display: flex;
+		justify-content: center;
+	}
+
+	.addedComponentInput {
+		input {
+			outline: none;
+			border: 1px solid c.$border-color;
+			border-right: none;
+			border-left: none;
+			padding: 10px;
+		}
+
+		.decreaseButton,
+		.increaseButton {
+			padding: 10px;
+			border: none;
+			background-color: c.$secondary-theme-color;
+		}
+
+		.decreaseButton {
+			border-top-left-radius: 10px;
+			border-bottom-left-radius: 10px;
+			img {
+				transform: rotate(90deg);
+			}
+		}
+
+		.increaseButton {
+			border-top-right-radius: 10px;
+			border-bottom-right-radius: 10px;
+			img {
+				transform: rotate(-90deg);
+			}
+		}
+	}
+}

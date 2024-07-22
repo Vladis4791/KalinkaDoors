@@ -6,9 +6,6 @@ import DoorsList from "./pages/DoorsList/DoorsList";
 import DoorType from "./pages/SpecificDoorQuestions/DoorType/DoorType";
 import CurrentDoorSettings from "./pages/CurrentDoorSettings/CurrentDoorSettings";
 import DoorStateQuestion from "./pages/SpecificDoorQuestions/DoorState/DoorState";
-import Depth from "./pages/SpecificDoorQuestions/DoorSize/Depth";
-import Width from "./pages/SpecificDoorQuestions/DoorSize/Width";
-import Height from "./pages/SpecificDoorQuestions/DoorSize/Height";
 import DoorstepSettings from "./pages/DoorstepSettings/DoorstepSettings";
 import MainFixationTypePage from "./pages/FixationType/MainFixationTypePage";
 import OneFixationTypeOnObjectSetting from "./pages/FixationType/OneFixationTypeOnObjectSetting/OneFixationTypeOnObjectSetting";
@@ -18,6 +15,7 @@ import DifferentLockingTypes from "./pages/LockingType/DifferentLockingTypes/Dif
 import DoorSize from "./pages/SpecificDoorQuestions/DoorSize/DoorSize";
 import OneLockingType from "./pages/LockingType/OneLockingType/OneLockingType";
 import MainLockingTypePage from "./pages/LockingType/MainLockingTypePage";
+import Summary from "./pages/Summary/Summary";
 
 function App() {
 	return (
@@ -82,6 +80,7 @@ function App() {
 				/>
 
 				<Route path="oneLockingType" element={<OneLockingType />} />
+				<Route path="summary" element={<Summary />} />
 				<Route
 					path="reinforcedHingesSelection"
 					element={<DoorsWithLockingSelection />}
